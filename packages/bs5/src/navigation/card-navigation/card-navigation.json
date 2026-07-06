@@ -1,0 +1,95 @@
+{
+  "view": {
+    "cardContainer": {
+      "name": [
+        "$props/name",
+        "cardContainer"
+      ],
+      "tag": "div",
+      "component": "GridContainer",
+      "classes": [
+        "justify-content-center",
+        "$props/containerClasses"
+      ],
+      "colClasses": "$props/colClasses",
+      "content": [
+        "$state/menuLinksCards",
+        {
+          "ref": "$definitions/card",
+          "name": [
+            "$props/name",
+            "childrenCard"
+          ],
+          "classes": "$props/cardClasses",
+          "content": [
+            {
+              "name": [
+                "$props/name",
+                "children"
+              ],
+              "tag": "div"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "card": {
+      "name": [
+        "$props/name",
+        "$data/name",
+        "card"
+      ],
+      "tag": "div",
+      "component": "CardContainer",
+      "classes": [
+        "card-navigation-item",
+        "text-center"
+      ],
+      "bg": "$data/background",
+      "content": {
+        "link": {
+          "name": [
+            "$props/name",
+            "$data/name",
+            "link"
+          ],
+          "component": "Link",
+          "to": "$data/to",
+          "classes": [
+            "text-decoration-none",
+            "$eval/classes"
+          ],
+          "content": {
+            "cardLabel": {
+              "name": [
+                "$props/name",
+                "$data/name",
+                "cardLabel"
+              ],
+              "tag": "h3",
+              "classes": "label",
+              "content": "$data/label"
+            },
+            "cardIcon": {
+              "name": [
+                "$props/name",
+                "$data/name",
+                "cardIcon"
+              ],
+              "component": "Icons",
+              "icon": "$data/icon",
+              "width": "4rem",
+              "inline": false,
+              "classes": [
+                "nav-icon",
+                "$eval/iconClasses"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

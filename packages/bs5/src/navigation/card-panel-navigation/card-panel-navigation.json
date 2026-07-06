@@ -1,0 +1,62 @@
+{
+  "view": {
+    "name": [
+      "$props/name",
+      "container"
+    ],
+    "component": "Container",
+    "classes": "py-3",
+    "content": {
+      "listCards": {
+        "name": [
+          "$props/name",
+          "listCards"
+        ],
+        "wrapperClasses": "container-fluid",
+        "component": "CardNavigation",
+        "classes": "container my-4",
+        "containerClasses": "g-3",
+        "colClasses": "auto-xs-12 auto-sm-6 auto-md-4 auto-lg-4 auto-xl-3 auto-xxl-3",
+        "menu": "$props/menu"
+      },
+      "panelRoutes": {
+        "name": [
+          "$props/name",
+          "panelRoutes"
+        ],
+        "wrapperClasses": "container-fluid",
+        "component": "GridContainer",
+        "classes": "g-2 justify-content-center",
+        "colClasses": [
+          "col-auto col-md-auto",
+          "auto-md-8 auto-lg-8 auto-xl-8 auto-xxl-6"
+        ],
+        "content": {
+          "listNav": {
+            "name": [
+              "$props/name",
+              "listNav"
+            ],
+            "component": "Navigation",
+            "wrapperClasses": "d-flex align-items-start",
+            "wrapperStyle": {
+              "position": "sticky",
+              "top": 120
+            },
+            "classes": "nav flex-column nav-pills",
+            "itemClasses": "nav-item",
+            "menu": "$props/menu"
+          },
+          "children": {
+            "name": [
+              "$props/name",
+              "children"
+            ],
+            "tag": "section"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {}
+}

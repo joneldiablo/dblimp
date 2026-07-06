@@ -1,0 +1,97 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "lib": [
+      "ES2019",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@dblimp/bs5": [
+        "packages/bs5/src"
+      ],
+      "@dblimp/bs5/*": [
+        "packages/bs5/src/*"
+      ],
+      "@dblimp/chartjs": [
+        "packages/chartjs/src"
+      ],
+      "@dblimp/chartjs/*": [
+        "packages/chartjs/src/*"
+      ],
+      "@dblimp/core": [
+        "packages/core/src"
+      ],
+      "@dblimp/core/*": [
+        "packages/core/src/*"
+      ],
+      "@dblimp/dnd": [
+        "packages/dnd/src"
+      ],
+      "@dblimp/dnd/*": [
+        "packages/dnd/src/*"
+      ],
+      "@dblimp/floating": [
+        "packages/floating/src"
+      ],
+      "@dblimp/floating/*": [
+        "packages/floating/src/*"
+      ],
+      "@dblimp/icomoon": [
+        "packages/icomoon/src"
+      ],
+      "@dblimp/icomoon/*": [
+        "packages/icomoon/src/*"
+      ],
+      "@dblimp/konva": [
+        "packages/konva/src"
+      ],
+      "@dblimp/konva/*": [
+        "packages/konva/src/*"
+      ],
+      "@dblimp/splide": [
+        "packages/splide/src"
+      ],
+      "@dblimp/splide/*": [
+        "packages/splide/src/*"
+      ],
+      "@dblimp/swiper": [
+        "packages/swiper/src"
+      ],
+      "@dblimp/swiper/*": [
+        "packages/swiper/src/*"
+      ],
+      "@dblimp/tabulator": [
+        "packages/tabulator/src"
+      ],
+      "@dblimp/tabulator/*": [
+        "packages/tabulator/src/*"
+      ],
+      "@dblimp/youtube": [
+        "packages/youtube/src"
+      ],
+      "@dblimp/youtube/*": [
+        "packages/youtube/src/*"
+      ]
+    },
+    "types": [
+      "node"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

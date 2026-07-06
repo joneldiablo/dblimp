@@ -1,0 +1,41 @@
+{
+  "name": "@dblimp/bs5",
+  "version": "1.0.0-dev",
+  "description": "Bootstrap 5 components for @dbl framework",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts",
+      "source": "./src/index.ts"
+    },
+    "./actions/action": {
+      "import": "./dist/esm/actions/action.js",
+      "require": "./dist/cjs/actions/action.js",
+      "types": "./dist/types/actions/action.d.ts",
+      "source": "./src/actions/action.tsx"
+    }
+  },
+  "scripts": {
+    "build:cjs": "tsc -p tsconfig.build.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "rm -rf dist/* && npm run build:cjs && npm run build:esm",
+    "test": "jest --config ./jest.config.ts",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1 || ^19.0.0",
+    "react-dom": "^18.3.1 || ^19.0.0",
+    "bootstrap": "^5.3.3",
+    "@dblimp/core": "^1.0.0-dev",
+    "@dblimp/icomoon": "^1.0.0-dev",
+    "@dblimp/floating": "^1.0.0-dev",
+    "dbl-utils": "^1.0.12"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
