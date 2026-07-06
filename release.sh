@@ -63,8 +63,8 @@ echo "Branch: $CURRENT_BRANCH"
 # ------------------------------------------------------------------
 # Step 2 – detect changed packages
 # ------------------------------------------------------------------
-# First release: if master and HEAD are the same, treat all packages as new
-if git merge-base --is-ancestor master HEAD 2>/dev/null && [ "$(git rev-parse master)" = "$(git rev-parse HEAD)" ]; then
+# No tags yet → first release → publish everything
+if [ -z "$(git tag)" ]; then
   CHANGED_PACKAGES=$(ls packages/)
   echo "First release – publishing all packages"
 else
@@ -152,7 +152,7 @@ echo "Tagged v${RELEASE_VER}"
 echo ""
 echo "Publishing to npm..."
 for pkg in $CHANGED_PACKAGES; do
-  NAME=$(node -p "require('./packages/$pkg/package.json').name")
+  NAME=$(node --input-type=module -e "import { readFileSync } from 'fs'; console.log(JSON.parse(readFileSync('./packages/$pkg/package.json','utf8')).name)")
   VER=$(get_ver packages/$pkg/package.json)
   echo ""
   echo "--- Publishing $NAME@$VER ---"
