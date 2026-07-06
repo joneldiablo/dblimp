@@ -1,7 +1,21 @@
 #!/bin/bash
 set -euo pipefail
 
+# Clean npm env vars that cause auth issues when run from within yarn
+unset npm_config_version_commit_hooks
+unset npm_config_version_tag_prefix
+unset npm_config_version_git_message
+unset npm_config_argv
+unset npm_config_version_git_tag
+unset npm_config_registry
+export NPM_CONFIG_REGISTRY="https://registry.npmjs.org/"
+
 echo "=== dblimp Release ==="
+echo "npm registry: $(npm config get registry)"
+echo "npm user:     $(npm whoami 2>/dev/null || echo 'NOT LOGGED IN')"
+
+# Abort if not logged in
+npm whoami &>/dev/null || { echo "Login first: npm login"; exit 1; }
 
 # ------------------------------------------------------------------
 # Helpers
@@ -133,20 +147,22 @@ git push origin "v${RELEASE_VER}"
 echo "Tagged v${RELEASE_VER}"
 
 # ------------------------------------------------------------------
-# Step 10 – npm publish
+# Step 10 – npm publish (interactive, OTP required per package)
 # ------------------------------------------------------------------
 echo ""
 echo "Publishing to npm..."
 for pkg in $CHANGED_PACKAGES; do
   NAME=$(node -p "require('./packages/$pkg/package.json').name")
   VER=$(get_ver packages/$pkg/package.json)
-  echo "Publishing $NAME@$VER"
-  echo "Enter OTP for $NAME (or press Enter to skip this package):"
+  echo ""
+  echo "--- Publishing $NAME@$VER ---"
+  echo "Enter OTP for $NAME (or press Enter to skip):"
   read -r OTP
   if [ -n "$OTP" ]; then
     (cd "packages/$pkg" && npm publish --otp="$OTP")
+    echo "✅ $NAME published"
   else
-    echo "Skipped $NAME"
+    echo "⏭️  Skipped $NAME"
   fi
 done
 
