@@ -1,6 +1,6 @@
 {
   "name": "@dblimp/icomoon",
-  "version": "1.0.0-dev",
+  "version": "0.0.0",
   "description": "Icomoon icon component for @dbl framework",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -29,5 +29,8 @@
   },
   "devDependencies": {
     "typescript": "^5.6.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

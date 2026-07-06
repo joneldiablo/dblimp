@@ -1,6 +1,6 @@
 {
   "name": "@dblimp/dnd",
-  "version": "1.0.0-dev",
+  "version": "0.0.0",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
@@ -27,5 +27,8 @@
   },
   "devDependencies": {
     "typescript": "^5.6.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
