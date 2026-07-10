@@ -1,6 +1,6 @@
 import React from "react";
 
-import { eventHandler } from "dbl-utils";
+import { eventHandler } from "@dblimp/core";
 
 import { Goat } from "@dblimp/core";
 import Field, { FieldProps, FieldState } from "./field";

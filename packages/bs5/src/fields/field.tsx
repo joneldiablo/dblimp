@@ -1,7 +1,6 @@
 import React, { Fragment, FragmentProps, createRef } from "react";
 
-import { randomS4, eventHandler } from "dbl-utils";
-import { extractNodeString } from "dbl-utils/extract-react-node-text";
+import { randomS4, eventHandler, extractNodeString } from "@dblimp/core";
 
 import Component, { ComponentProps, ComponentState } from "../component";
 

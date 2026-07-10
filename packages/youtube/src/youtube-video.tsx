@@ -2,7 +2,7 @@ import React from "react";
 import { Options as YTOptions } from "youtube-player/dist/types";
 import YouTube, { YouTubeProps } from "react-youtube";
 
-import { splitAndFlat } from "dbl-utils/utils";
+import { splitAndFlat } from "@dblimp/core";
 
 import Component, { ComponentProps, ComponentState } from "@dblimp/core/component";
 import AspectRatioContainer, {

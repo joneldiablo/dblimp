@@ -1,5 +1,5 @@
 import React from "react";
-import eventHandler from "dbl-utils/event-handler";
+import { eventHandler } from "@dblimp/core";
 import Component from "../component";
 
 export interface ModalButtonContainerProps {

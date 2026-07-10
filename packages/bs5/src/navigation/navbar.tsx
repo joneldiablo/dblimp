@@ -1,8 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import { randomS4 } from "dbl-utils";
-import { extractNodeString } from "dbl-utils/extract-react-node-text";
+import { randomS4, extractNodeString } from "@dblimp/core";
 
 import Icons from "@dblimp/icomoon";
 

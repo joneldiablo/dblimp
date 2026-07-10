@@ -1,5 +1,4 @@
-import resolveRefs from "dbl-utils/resolve-refs";
-import eventHandler from "dbl-utils/event-handler";
+import { resolveRefs, eventHandler } from "@dblimp/core";
 import Component, { ComponentProps } from "@dblimp/core/component";
 import Goat from "@dblimp/core/goat";
 

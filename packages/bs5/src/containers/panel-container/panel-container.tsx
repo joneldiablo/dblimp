@@ -1,6 +1,6 @@
 import React from "react";
 
-import { eventHandler } from "dbl-utils";
+import { eventHandler } from "@dblimp/core";
 import Component, { nameSuffixes } from "@dblimp/core/complex-component";
 
 import type { ComponentProps } from "../../component";

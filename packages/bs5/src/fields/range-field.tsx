@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 
-import { resolveRefs, eventHandler } from "dbl-utils";
+import { resolveRefs, eventHandler } from "@dblimp/core";
 import { Goat } from "@dblimp/core";
 
 import Field, { FieldProps, FieldState } from "./field";
