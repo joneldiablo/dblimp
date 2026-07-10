@@ -73,6 +73,15 @@ fi
 
 ROOT_VER=$(get_ver package.json)
 
+# Save bumped versions before merge (so merge can't revert them)
+declare -A PKG_VERSIONS
+if [ "$ADMIN_ONLY" = false ]; then
+  for pkg in $CHANGED_PACKAGES; do
+    PKG_VERSIONS[$pkg]=$(get_ver "packages/$pkg/package.json")
+  done
+fi
+SAVED_ROOT_VER="$ROOT_VER"
+
 # Step 4 – commit version on current branch
 git add .
 git commit -m "v${ROOT_VER}"
@@ -83,16 +92,15 @@ git checkout master
 git merge - --no-edit -X theirs
 echo "Merged $CURRENT_BRANCH → master"
 
-# Step 6 – strip suffix on master, build, test
+# Step 6 – strip suffix & apply saved versions (override merge result)
 if [ "$ADMIN_ONLY" = false ]; then
   for pkg in $CHANGED_PACKAGES; do
-    VER=$(get_ver packages/$pkg/package.json)
-    set_ver packages/$pkg/package.json "$(strip_suffix "$VER")"
+    VER="${PKG_VERSIONS[$pkg]}"
+    set_ver "packages/$pkg/package.json" "$(strip_suffix "$VER")"
   done
 fi
-VER=$(get_ver package.json)
-set_ver package.json "$(strip_suffix "$VER")"
-RELEASE_VER=$(get_ver package.json)
+RELEASE_VER=$(strip_suffix "$SAVED_ROOT_VER")
+set_ver package.json "$RELEASE_VER"
 echo "Release version: $RELEASE_VER"
 
 if [ "$ADMIN_ONLY" = false ]; then
