@@ -84,6 +84,12 @@
       ],
       "@dblimp/youtube/*": [
         "packages/youtube/src/*"
+      ],
+      "@dblimp/react-pdf": [
+        "packages/react-pdf/src"
+      ],
+      "@dblimp/react-pdf/*": [
+        "packages/react-pdf/src/*"
       ]
     },
     "types": [

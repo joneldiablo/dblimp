@@ -1,4 +1,4 @@
-import { deepMerge, resolveRefs } from "dbl-utils";
+import { deepMerge, resolveRefs } from "@dblimp/core";
 import {
   GoatComponent,
   GoatComponentProps,

@@ -68,3 +68,6 @@ export * from "./goat";
 export * from "./goat-component";
 export * from "./complex-component";
 export * from "./complex-responsive-component";
+
+export * from 'dbl-utils';
+export { extractNodeString } from 'dbl-utils/extract-react-node-text';

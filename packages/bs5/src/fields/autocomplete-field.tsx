@@ -1,6 +1,6 @@
 import React, { createRef } from "react";
 
-import { eventHandler } from "dbl-utils";
+import { eventHandler } from "@dblimp/core";
 
 import Field from "./field";
 

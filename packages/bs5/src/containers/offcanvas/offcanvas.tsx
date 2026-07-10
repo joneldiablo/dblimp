@@ -2,7 +2,7 @@ import React, { JSX, FC, ExoticComponent } from "react";
 import Offcanvas from "bootstrap/js/dist/offcanvas";
 
 import { Goat } from "@dblimp/core";
-import { eventHandler, resolveRefs } from "dbl-utils";
+import { eventHandler, resolveRefs } from "@dblimp/core";
 
 import Component, { ComponentProps, ComponentState } from "../../component";
 import schema from "./offcanvas.json";

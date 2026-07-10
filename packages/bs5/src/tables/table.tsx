@@ -7,7 +7,7 @@ import {
   formatValue,
   resolveRefs,
   splitAndFlat,
-} from "dbl-utils";
+} from "@dblimp/core";
 import Icons from "@dblimp/icomoon";
 import { Goat } from "@dblimp/core";
 import FloatingContainer, {

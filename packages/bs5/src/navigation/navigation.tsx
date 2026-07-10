@@ -2,10 +2,7 @@ import React, { createRef } from "react";
 import { NavLink } from "react-router-dom";
 import Collapse from "bootstrap/js/dist/collapse";
 
-import eventHandler from "dbl-utils/event-handler";
-import { deepMerge } from "dbl-utils/object-mutation";
-import { splitAndFlat } from "dbl-utils/utils";
-import { extractNodeString } from "dbl-utils/extract-react-node-text";
+import { eventHandler, deepMerge, splitAndFlat, extractNodeString } from "@dblimp/core";
 import Goat from "@dblimp/core/goat";
 import Icons from "@dblimp/icomoon";
 import Component, { ComponentProps, ComponentState } from "@dblimp/core/component";

@@ -6,7 +6,7 @@ import {
   type DropResult,
 } from "react-beautiful-dnd";
 
-import { eventHandler } from "dbl-utils";
+import { eventHandler } from "@dblimp/core";
 
 import Component, {
   type ComponentProps,

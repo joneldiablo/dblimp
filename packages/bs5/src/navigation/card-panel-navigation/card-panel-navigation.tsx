@@ -2,7 +2,7 @@ import JsonComponent, { JrcProps } from "dbl-components/lib/js/json-render-compo
 
 import schema from "./card-panel-navigation.json";
 import "./style.scss";
-import { resolveRefs } from "dbl-utils";
+import { resolveRefs } from "@dblimp/core";
 
 export interface CardPanelNavigationProps extends JrcProps {
   location: any;

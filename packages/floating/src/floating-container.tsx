@@ -13,7 +13,7 @@ import {
   UseFloatingOptions,
 } from "@floating-ui/react";
 
-import { eventHandler, splitAndFlat } from "dbl-utils";
+import { eventHandler, splitAndFlat } from "@dblimp/core";
 
 import useEventHandler from "@dblimp/core/hooks/use-event-handler";
 import { ComponentProps } from "@dblimp/core/component";

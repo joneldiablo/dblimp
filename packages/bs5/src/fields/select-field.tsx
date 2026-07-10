@@ -1,6 +1,6 @@
 import React from "react";
 
-import { extractNodeString } from "dbl-utils/extract-react-node-text";
+import { extractNodeString } from "@dblimp/core";
 
 import Field from "./field";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "bootstrap/js/dist/modal";
 
-import { eventHandler, splitAndFlat } from "dbl-utils";
+import { eventHandler, splitAndFlat } from "@dblimp/core";
 
 import Component from "../component";
 

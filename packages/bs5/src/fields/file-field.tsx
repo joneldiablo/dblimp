@@ -2,8 +2,7 @@ import React from "react";
 import bytes from "bytes";
 import LZMA from "lzma";
 
-import { eventHandler } from "dbl-utils";
-import { extractNodeString } from "dbl-utils/extract-react-node-text";
+import { eventHandler, extractNodeString } from "@dblimp/core";
 import { Goat } from "@dblimp/core";
 
 import Field, { FieldProps, FieldState } from "./field";

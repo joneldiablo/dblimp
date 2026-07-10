@@ -12,7 +12,7 @@ import {
 } from "react-chartjs-2";
 import { ChartTypeRegistry, CoreChartOptions } from "chart.js";
 
-import eventHandler from "dbl-utils/event-handler";
+import { eventHandler } from "@dblimp/core";
 
 import ProportionalContainer, {
   ProportionalContainerProps,
