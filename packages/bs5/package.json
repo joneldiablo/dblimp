@@ -1,6 +1,6 @@
 {
   "name": "@dblimp/bs5",
-  "version": "1.0.0-dev",
+  "version": "1.0.1-dev",
   "description": "Bootstrap 5 components for @dbl framework",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
