@@ -1,6 +1,20 @@
 #!/bin/bash
 set -euo pipefail
 
+# Parse flags
+CONTINUE_MODE=false
+for arg in "$@"; do
+  case "$arg" in
+    --continue) CONTINUE_MODE=true ;;
+    -h|--help)
+      echo "Usage: release.sh [--continue]"
+      echo "  (default) full release from a feature/dev branch"
+      echo "  --continue resume npm publishing after a cut-off script (assumes release is tagged on master)"
+      exit 0
+      ;;
+  esac
+done
+
 # Clean npm env vars that cause auth issues when run from within yarn
 unset npm_config_version_commit_hooks
 unset npm_config_version_tag_prefix
@@ -14,12 +28,73 @@ echo "=== dblimp Release ==="
 echo "npm user: $(npm whoami 2>/dev/null || echo 'NOT LOGGED IN')"
 npm whoami &>/dev/null || { echo "Login first: npm login"; exit 1; }
 
+# Continue mode short-circuit: only re-run npm publishing + back to dev.
+if [ "$CONTINUE_MODE" = true ]; then
+  publish_only
+  exit 0
+fi
+
 # Helpers
 get_ver() { node --input-type=module -e "import{readFileSync}from'fs';console.log(JSON.parse(readFileSync('$1','utf8')).version)"; }
 set_ver() { node --input-type=module -e "import{readFileSync,writeFileSync}from'fs';const p=JSON.parse(readFileSync('$1','utf8'));p.version='$2';writeFileSync('$1',JSON.stringify(p,null,2)+'\n')"; }
 bump() { node -e "const s='$1'.split('.'),p=s.pop().split('-')[0];s.push(String((parseInt(p,10)||0)+1));console.log(s.join('.'))"; }
 add_suffix() { local v=$1 s=$2; [ "$s" = "master" ] && echo "$v" || echo "${v}-${s}"; }
 strip_suffix() { echo "$1" | sed 's/-.*$//'; }
+
+# Publish a single package to npm, retrying OTP until success, "skip", or blank.
+publish_package() {
+  local pkg=$1
+  local NAME VER
+  NAME=$(node --input-type=module -e "import{readFileSync}from'fs';console.log(JSON.parse(readFileSync('packages/$pkg/package.json','utf8')).name)")
+  VER=$(get_ver "packages/$pkg/package.json")
+
+  # Skip if this exact version is already live on the registry.
+  if [ "$(npm view "$NAME@$VER" version 2>/dev/null)" = "$VER" ]; then
+    echo "  ✅ $NAME@$VER already published – skipping"
+    return 0
+  fi
+
+  echo ""
+  echo "--- Publishing $NAME@$VER ---"
+  while true; do
+    echo "Enter npm OTP for $NAME@$VER (blank/skip = skip this package):"
+    read -r OTP || return 1
+    if [ -z "$OTP" ]; then
+      echo "⏭️  Skipped $NAME@$VER"
+      return 0
+    fi
+    if [ "$OTP" = "skip" ]; then
+      echo "⏭️  Skipped $NAME@$VER"
+      return 0
+    fi
+    if (cd "packages/$pkg" && npm publish --otp="$OTP"); then
+      echo "✅ $NAME@$VER published"
+      return 0
+    else
+      echo "Publish failed (bad OTP or network). Try again."
+    fi
+  done
+}
+
+# Continue mode: resume npm publishing for the current release, then return to dev.
+publish_only() {
+  local START_BRANCH RETURN_BRANCH
+  START_BRANCH=$(git symbolic-ref --short HEAD)
+  RETURN_BRANCH="$START_BRANCH"
+  [ "$RETURN_BRANCH" = "master" ] && RETURN_BRANCH="dev"
+  RELEASE_VER=$(get_ver package.json)
+  RELEASE_VER=$(strip_suffix "$RELEASE_VER")
+  echo "Resuming npm publish for v${RELEASE_VER} (working on $START_BRANCH)..."
+  CHANGED_PACKAGES=$(ls packages/)
+  for pkg in $CHANGED_PACKAGES; do
+    publish_package "$pkg"
+  done
+  if [ "$(git symbolic-ref --short HEAD)" != "$RETURN_BRANCH" ]; then
+    git checkout "$RETURN_BRANCH" 2>/dev/null || true
+  fi
+  echo "Back to $RETURN_BRANCH"
+  echo "=== Publish complete: v${RELEASE_VER} ==="
+}
 
 # Step 1 – check clean working tree
 if ! git diff-index --quiet HEAD --; then echo "Uncommitted changes detected."; exit 1; fi
@@ -125,18 +200,7 @@ if [ "$ADMIN_ONLY" = false ]; then
   echo ""
   echo "Publishing to npm..."
   for pkg in $CHANGED_PACKAGES; do
-    NAME=$(node --input-type=module -e "import{readFileSync}from'fs';console.log(JSON.parse(readFileSync('packages/$pkg/package.json','utf8')).name)")
-    VER=$(get_ver packages/$pkg/package.json)
-    echo ""
-    echo "--- Publishing $NAME@$VER ---"
-    echo "Enter OTP for $NAME (or blank to skip):"
-    read -r OTP
-    if [ -n "$OTP" ]; then
-      (cd "packages/$pkg" && npm publish --otp="$OTP")
-      echo "✅ $NAME published"
-    else
-      echo "⏭️  Skipped $NAME"
-    fi
+    publish_package "$pkg"
   done
 else
   echo "Admin-only release – no npm publish"
