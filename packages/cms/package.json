@@ -1,6 +1,6 @@
 {
   "name": "@dblimp/cms",
-  "version": "1.0.1-dev",
+  "version": "1.0.1",
   "description": "High-level CMS/composition components for the @dbl framework, built on JSON templates",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
