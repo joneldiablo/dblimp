@@ -1,0 +1,99 @@
+{
+  "view": {
+    "label": {
+      "name": [
+        "$props/name",
+        "label"
+      ],
+      "tag": "$props/tagLabel",
+      "classes": "alert-heading",
+      "content": [
+        {
+          "name": [
+            "$props/name",
+            "labelIcon"
+          ],
+          "ref": "$definitions/icon"
+        },
+        "$props/label"
+      ]
+    },
+    "contentNotification": {
+      "name": [
+        "$props/name",
+        "contentNotification"
+      ],
+      "tag": "div",
+      "classes": "mb-0 d-flex align-items-center",
+      "content": {
+        "icon": {
+          "name": [
+            "$props/name",
+            "contentIcon"
+          ],
+          "ref": "$definitions/icon"
+        },
+        "childrenHere": {
+          "name": [
+            "$props/name",
+            "childrenHere"
+          ],
+          "tag": false
+        }
+      }
+    },
+    "errorLine": {
+      "name": [
+        "$props/name",
+        "errorLine"
+      ],
+      "tag": "hr",
+      "style": {
+        "width": "calc(100% + 2rem)"
+      }
+    },
+    "errorDetails": {
+      "name": [
+        "$props/name",
+        "errorDetails"
+      ],
+      "component": "DetailsContainer",
+      "label": "$props/labelError",
+      "labelClasses": "alert-link",
+      "containerClasses": "text-bg-dark p-2",
+      "style": {
+        "width": "calc(100% + 2rem)"
+      },
+      "content": {
+        "name": [
+          "$props/name",
+          "errorContent"
+        ],
+        "tag": "pre",
+        "classes": "mb-0",
+        "content": "$props/error"
+      }
+    },
+    "closeButton": {
+      "name": [
+        "$props/name",
+        "closeButton"
+      ],
+      "component": "Action",
+      "classButton": false,
+      "classes": "btn-close",
+      "_props": {
+        "aria-label": "Close"
+      }
+    }
+  },
+  "definitions": {
+    "icon": {
+      "inline": false,
+      "component": "Icons",
+      "classes": "me-3",
+      "icon": "$props/icon",
+      "width": "2rem"
+    }
+  }
+}

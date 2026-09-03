@@ -25,6 +25,12 @@
       "@dblimp/bs5/*": [
         "packages/bs5/src/*"
       ],
+      "@dblimp/cms": [
+        "packages/cms/src"
+      ],
+      "@dblimp/cms/*": [
+        "packages/cms/src/*"
+      ],
       "@dblimp/chartjs": [
         "packages/chartjs/src"
       ],

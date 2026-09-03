@@ -67,7 +67,7 @@ export default class Component<
     | React.FC
     | typeof React.Component
     | ExoticComponent = "div";
-  protected classes: string = "";
+  protected classes: string | string[] = "";
   protected style: React.CSSProperties = {};
   protected name: string;
   protected ref = createRef<any>();

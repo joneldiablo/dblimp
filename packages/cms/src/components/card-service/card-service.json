@@ -1,0 +1,113 @@
+{
+  "view": {
+    "image": {
+      "name": [
+        "image",
+        "$definitions/name"
+      ],
+      "component": "Image",
+      "src": "$definitions/imgSrc",
+      "classes": "card-img-top",
+      "imageClasses": "w-100 h-100",
+      "style": {
+        "height": 180,
+        "objectFit": "cover"
+      }
+    },
+    "body": {
+      "name": [
+        "body",
+        "$definitions/name"
+      ],
+      "tag": "div",
+      "classes": [
+        "card-body d-flex flex-column",
+        "$definitions/bodyClasses"
+      ],
+      "content": {
+        "cardTitle": {
+          "name": [
+            "cardTitle",
+            "$definitions/name"
+          ],
+          "tag": "h3",
+          "classes": [
+            "h4 fw-bold",
+            "$definitions/labelClasses"
+          ],
+          "content": [
+            {
+              "name": [
+                "icon",
+                "$definitions/name"
+              ],
+              "component": "Icons",
+              "inline": false,
+              "icon": "$definitions/icon",
+              "classes": [
+                "text-identity3 d-inline-block me-2 align-bottom",
+                "$definitions/iconClasses"
+              ],
+              "style": {
+                "width": "2rem"
+              }
+            },
+            "$definitions/cardTitle"
+          ]
+        },
+        "cardText": {
+          "name": [
+            "cardText",
+            "$definitions/name"
+          ],
+          "tag": "p",
+          "classes": "text-body-secondary",
+          "content": "$definitions/cardText"
+        },
+        "cardList": {
+          "name": [
+            "cardList",
+            "$definitions/name"
+          ],
+          "component": "ListContainer",
+          "wrapperClasses": "mb-auto",
+          "classes": "list-unstyled small mb-3",
+          "content": [
+            "$definitions/cardList"
+          ]
+        },
+        "childrenHere": {
+          "name": [
+            "childrenHere",
+            "$definitions/name"
+          ],
+          "tag": false
+        },
+        "cta": {
+          "name": [
+            "cta",
+            "$definitions/name"
+          ],
+          "component": "Action",
+          "type": "link",
+          "classes": "btn-outline-primary",
+          "to": "$definitions/ctaTo",
+          "content": "$definitions/cta"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "name": "$props/name",
+    "bodyClasses": "$props/bodyClasses",
+    "cta": "$props/btnContent",
+    "icon": "$props/icon",
+    "iconClasses": "$props/iconClasses",
+    "labelClasses": "$props/labelClasses",
+    "imgSrc": "$props/imgSrc",
+    "cardTitle": "$props/label",
+    "cardText": "$props/description",
+    "cardList": "$props/list",
+    "ctaTo": "$props/ctaTo"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "view": {
+    "name": ["$props/name", "gridArticles"],
+    "wrapper": false,
+    "component": "GridContainer",
+    "classes": "g-2",
+    "listColClasses": [
+      "auto-xs-12 auto-sm-4 auto-md-4 auto-lg-3 auto-xl-2 auto-xxl-2",
+      "auto-xs-12 auto-sm-8 auto-md-8 auto-lg-9 auto-xl-10 auto-xxl-10"
+    ],
+    "articleColClasses": [
+      "auto-xs-12 auto-sm-4 auto-md-3 auto-lg-3 auto-xl-2 auto-xxl-2",
+      "auto-xs-12 auto-sm-8 auto-md-3 auto-lg-3 auto-xl-3 auto-xxl-3",
+      "auto-xs-12 auto-sm-12 auto-md-6 auto-lg-6 auto-xl-7 auto-xxl-7"
+    ],
+    "content": {
+      "panel": {
+        "name": ["$props/name", "panel"],
+        "component": "FormContainer",
+        "wrapperStyle": {
+          "position": "sticky",
+          "top": 120
+        },
+        "fields": "$props/filterFields",
+        "content": {
+          "name": ["$props/name", "gridForm"],
+          "wrapper": false,
+          "classes": "vstack gap-3",
+          "content": [
+            "$props/filterFields",
+            {
+              "name": ["$props/name", "submitBtn"],
+              "component": "Action",
+              "type": "submit",
+              "content": "Search",
+              "context": "${props/name}-form",
+              "icon": "filter"
+            }
+          ]
+        }
+      },
+      "list": {
+        "name": ["$props/name", "list"],
+        "component": "GridContainer",
+        "classes": "g-2"
+      },
+      "articleView": {
+        "name": ["$props/name", "articleView"],
+        "tag": "div",
+        "content": {
+          "actions": {
+            "name": ["$props/name", "actions"],
+            "content": {
+              "closeBtn": {
+                "name": ["$props/name", "closeBtn"],
+                "component": "Action",
+                "classes": "p-0 btn-sm",
+                "type": "link",
+                "to": ".",
+                "content": ["<Icons icon=undo class=me-2></Icons>", "Regresar"]
+              }
+            }
+          },
+          "space": "<br />",
+          "children": {
+            "name": ["$props/name", "children"]
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "line": {
+      "name": ["$props/name", "$data/name", "line"],
+      "key": "${props/name}-${data/name}-line",
+      "dataName": "$data/name",
+      "colClasses": "auto-xs-12 auto-sm-12 auto-md-12 auto-lg-6 auto-xl-6 auto-xxl-6",
+      "wrapper": "article",
+      "classes": "card",
+      "content": {
+        "wrapperClasses": "card-body",
+        "name": ["$props/name", "$data/name", "body"],
+        "content": {
+          "title": {
+            "name": ["$props/name", "$data/name", "title"],
+            "tag": "h4",
+            "content": "$data/label"
+          },
+          "resume": {
+            "name": ["$props/name", "$data/name", "resume"],
+            "tag": "div",
+            "content": "$data/description"
+          },
+          "link": {
+            "name": ["$props/name", "$data/name", "link"],
+            "id": "${props/name}-${data/name}-link",
+            "dataName": "$data/name",
+            "component": "Action",
+            "type": "link",
+            "classes": "stretched-link float-end",
+            "icon": "angle-right",
+            "to": "./${data/name}",
+            "value": "$data"
+          }
+        }
+      }
+    }
+  }
+}

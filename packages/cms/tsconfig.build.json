@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist/cjs",
+    "declarationDir": "./dist/types",
+    "module": "CommonJS",
+    "rootDir": "./src",
+    "declaration": true,
+    "moduleResolution": "node",
+    "paths": {
+      "@dblimp/core": ["packages/core/dist/types/index"],
+      "@dblimp/core/*": ["packages/core/dist/types/*"],
+      "@dblimp/bs5": ["packages/bs5/dist/types/index"],
+      "@dblimp/bs5/*": ["packages/bs5/dist/types/*"],
+      "@dblimp/icomoon": ["packages/icomoon/dist/types/index"],
+      "@dblimp/icomoon/*": ["packages/icomoon/dist/types/*"]
+    },
+    "baseUrl": "../.."
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/__tests__/**/*", "**/*.test.ts", "**/*.test.tsx"]
+}

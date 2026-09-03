@@ -1,0 +1,101 @@
+{
+  "view": {
+    "body": {
+      "name": [
+        "body",
+        "$definitions/name"
+      ],
+      "tag": "div",
+      "classes": [
+        "card-body d-flex flex-column",
+        "$definitions/bodyClasses"
+      ],
+      "content": {
+        "label": {
+          "name": [
+            "label",
+            "$definitions/name"
+          ],
+          "tag": "h3",
+          "classes": [
+            "h4 fw-bold",
+            "$definitions/labelClasses"
+          ],
+          "content": "$definitions/label"
+        },
+        "price": {
+          "name": [
+            "price",
+            "$definitions/name"
+          ],
+          "tag": "p",
+          "classes": [
+            "display-6 fw-bold text-identity3",
+            "$definitions/priceClasses"
+          ],
+          "content": "$definitions/price"
+        },
+        "description": {
+          "name": [
+            "description",
+            "$definitions/name"
+          ],
+          "tag": "p",
+          "classes": [
+            "text-body-secondary",
+            "$definitions/descriptionClasses"
+          ],
+          "content": "$definitions/description"
+        },
+        "list": {
+          "name": [
+            "list",
+            "$definitions/name"
+          ],
+          "component": "ListContainer",
+          "wrapperClasses": "mb-auto",
+          "classes": [
+            "list-unstyled small mb-4",
+            "$definitions/listClasses"
+          ],
+          "content": [
+            "$definitions/list"
+          ]
+        },
+        "childrenHere": {
+          "name": [
+            "childrenHere",
+            "$definitions/name"
+          ],
+          "tag": false
+        },
+        "cta": {
+          "name": [
+            "cta",
+            "$definitions/name"
+          ],
+          "component": "Action",
+          "type": "link",
+          "classes": "$definitions/ctaClasses",
+          "to": "$definitions/ctaTo",
+          "content": "$definitions/ctaContent"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "name": "$props/name",
+    "bodyClasses": "$props/bodyClasses",
+    "label": "$props/label",
+    "labelClasses": "$props/labelClasses",
+    "price": "$props/price",
+    "priceClasses": "$props/priceClasses",
+    "description": "$props/description",
+    "descriptionClasses": "$props/descriptionClasses",
+    "list": "$props/list",
+    "listClasses": "$props/listClasses",
+    "ctaContent": "$props/ctaContent",
+    "ctaTo": "$props/ctaTo",
+    "ctaClasses": "$props/ctaClasses"
+  }
+}

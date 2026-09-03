@@ -22,6 +22,7 @@ export interface GoatComponentState extends ComponentState {
 export interface ComponentTemplateSchema {
   view: Record<string, any>;
   definitions?: Record<string, any>;
+  rules?: Record<string, any>;
 }
 
 export default class GoatComponent<
@@ -57,7 +58,7 @@ export default class GoatComponent<
     return this.props;
   }
 
-  get childrenIn(): string | boolean {
+  get childrenIn(): string | boolean | null {
     return this.props.childrenIn ?? false;
   }
 

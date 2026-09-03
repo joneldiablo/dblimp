@@ -1,0 +1,115 @@
+{
+  "name": "@dblimp/cms",
+  "version": "0.0.1",
+  "description": "High-level CMS/composition components for the @dbl framework, built on JSON templates",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts",
+      "source": "./src/index.ts"
+    },
+    "./components/articles-list/articles-list": {
+      "import": "./dist/esm/components/articles-list/articles-list.js",
+      "require": "./dist/cjs/components/articles-list/articles-list.js",
+      "types": "./dist/types/components/articles-list/articles-list.d.ts"
+    },
+    "./components/blog-post/blog-post": {
+      "import": "./dist/esm/components/blog-post/blog-post.js",
+      "require": "./dist/cjs/components/blog-post/blog-post.js",
+      "types": "./dist/types/components/blog-post/blog-post.d.ts"
+    },
+    "./components/calendar-field/calendar-field": {
+      "import": "./dist/esm/components/calendar-field/calendar-field.js",
+      "require": "./dist/cjs/components/calendar-field/calendar-field.js",
+      "types": "./dist/types/components/calendar-field/calendar-field.d.ts"
+    },
+    "./components/card-navigation/card-navigation": {
+      "import": "./dist/esm/components/card-navigation/card-navigation.js",
+      "require": "./dist/cjs/components/card-navigation/card-navigation.js",
+      "types": "./dist/types/components/card-navigation/card-navigation.d.ts"
+    },
+    "./components/card-panel-navigation/card-panel-navigation": {
+      "import": "./dist/esm/components/card-panel-navigation/card-panel-navigation.js",
+      "require": "./dist/cjs/components/card-panel-navigation/card-panel-navigation.js",
+      "types": "./dist/types/components/card-panel-navigation/card-panel-navigation.d.ts"
+    },
+    "./components/card-plans/card-plans": {
+      "import": "./dist/esm/components/card-plans/card-plans.js",
+      "require": "./dist/cjs/components/card-plans/card-plans.js",
+      "types": "./dist/types/components/card-plans/card-plans.d.ts"
+    },
+    "./components/card-service/card-service": {
+      "import": "./dist/esm/components/card-service/card-service.js",
+      "require": "./dist/cjs/components/card-service/card-service.js",
+      "types": "./dist/types/components/card-service/card-service.d.ts"
+    },
+    "./components/endpoint-loader/endpoint-loader": {
+      "import": "./dist/esm/components/endpoint-loader/endpoint-loader.js",
+      "require": "./dist/cjs/components/endpoint-loader/endpoint-loader.js",
+      "types": "./dist/types/components/endpoint-loader/endpoint-loader.d.ts"
+    },
+    "./components/header-blog/header-blog": {
+      "import": "./dist/esm/components/header-blog/header-blog.js",
+      "require": "./dist/cjs/components/header-blog/header-blog.js",
+      "types": "./dist/types/components/header-blog/header-blog.d.ts"
+    },
+    "./components/notifications/notifications": {
+      "import": "./dist/esm/components/notifications/notifications.js",
+      "require": "./dist/cjs/components/notifications/notifications.js",
+      "types": "./dist/types/components/notifications/notifications.d.ts"
+    },
+    "./components/opening-hours/opening-hours": {
+      "import": "./dist/esm/components/opening-hours/opening-hours.js",
+      "require": "./dist/cjs/components/opening-hours/opening-hours.js",
+      "types": "./dist/types/components/opening-hours/opening-hours.d.ts"
+    },
+    "./components/image": {
+      "import": "./dist/esm/components/image.js",
+      "require": "./dist/cjs/components/image.js",
+      "types": "./dist/types/components/image.d.ts"
+    },
+    "./utils/assets": {
+      "import": "./dist/esm/utils/assets.js",
+      "require": "./dist/cjs/utils/assets.js",
+      "types": "./dist/types/utils/assets.d.ts"
+    },
+    "./utils/find-scrollable-parent": {
+      "import": "./dist/esm/utils/find-scrollable-parent.js",
+      "require": "./dist/cjs/utils/find-scrollable-parent.js",
+      "types": "./dist/types/utils/find-scrollable-parent.d.ts"
+    },
+    "./utils/index": {
+      "import": "./dist/esm/utils/index.js",
+      "require": "./dist/cjs/utils/index.js",
+      "types": "./dist/types/utils/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build:cjs": "tsc -p tsconfig.build.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "rm -rf dist/* && npm run build:cjs && npm run build:esm",
+    "test": "jest --config ./jest.config.ts",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1 || ^19.0.0",
+    "react-dom": "^18.3.1 || ^19.0.0",
+    "react-router": "^7.0.0",
+    "moment": "^2.30.1",
+    "object-hash": "^3.0.0",
+    "react-calendar": "^6.0.0",
+    "@dblimp/core": "^1.0.0-dev",
+    "@dblimp/bs5": "^1.0.0-dev",
+    "@dblimp/icomoon": "^1.0.0-dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

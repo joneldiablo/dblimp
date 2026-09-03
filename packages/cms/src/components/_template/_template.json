@@ -1,0 +1,10 @@
+{
+  "view": {
+    "children": {
+      "tag": "div"
+    }
+  },
+  "definitions": {
+    "_templateArray": {}
+  }
+}

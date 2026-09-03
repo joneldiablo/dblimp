@@ -1,0 +1,84 @@
+{
+  "view": {
+    "name": [
+      "$props/name",
+      "header-blog-container"
+    ],
+    "wrapperClasses": "container wrap-grid",
+    "component": "GridContainer",
+    "classes": "align-items-center",
+    "colClasses": [
+      "auto-xs-12 auto-sm-8 auto-md-7 auto-lg-6 auto-xl-6 auto-xxl-5",
+      "auto-xs-12 auto-sm-4 auto-md-5 auto-lg-6 auto-xl-4 auto-xxl-4 ms-auto"
+    ],
+    "style": {
+      "minHeight": "200px"
+    },
+    "content": {
+      "contentHB": {
+        "name": [
+          "$props/name",
+          "contentHB"
+        ],
+        "tag": "section",
+        "classes": "contentHB",
+        "content": {
+          "left": {
+            "name": [
+              "$props/name",
+              "left"
+            ],
+            "tag": "section",
+            "component": "SlideContainer",
+            "content": "$definitions/leftContent"
+          },
+          "children": {
+            "name": [
+              "$props/name",
+              "children"
+            ],
+            "wrapper": false
+          }
+        }
+      },
+      "images": {
+        "name": [
+          "$props/name",
+          "images"
+        ],
+        "component": "Image",
+        "src": "$props/imageSrc",
+        "classes": [
+          "images",
+          "$props/imageClasses"
+        ],
+        "imageClasses": "w-100 h-100",
+        "objectFit": "contain"
+      }
+    }
+  },
+  "definitions": {
+    "leftContent": {
+      "title": {
+        "name": [
+          "$props/name",
+          "title"
+        ],
+        "tag": "$props/titleTag",
+        "classes": "$props/titleClasses",
+        "principal": "$principal",
+        "content": "$data/title"
+      },
+      "description": {
+        "name": [
+          "$props/name",
+          "description"
+        ],
+        "tag": "$props/descriptionTag",
+        "classes": "$props/descriptionClasses",
+        "principal": "$principal",
+        "content": "$data/description"
+      }
+    }
+  }
+}

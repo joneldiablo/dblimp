@@ -1,0 +1,111 @@
+{
+  "view": {
+    "topEL": {
+      "tag": "div",
+      "name": [
+        "topEL",
+        "$props/name"
+      ]
+    },
+    "errorEL": {
+      "tag": "div",
+      "name": [
+        "errorEL",
+        "$props/name"
+      ],
+      "content": "$props/errorTemplate",
+      "active": false
+    },
+    "containerEL": {
+      "tag": "div",
+      "name": [
+        "containerEL",
+        "$props/name"
+      ],
+      "component": "GridContainer",
+      "classes": "$props/gridClasses",
+      "colClasses": "$props/colClasses",
+      "content": [
+        "$props/template"
+      ]
+    },
+    "emptyStateEL": {
+      "tag": "div",
+      "name": [
+        "emptyStateEL",
+        "$props/name"
+      ],
+      "component": "GridContainer",
+      "classes": "$props/gridClasses",
+      "colClasses": "$props/colClasses",
+      "content": [
+        "$props/emptyTemplate"
+      ],
+      "active": false
+    },
+    "bottomEL": {
+      "tag": "div",
+      "name": [
+        "bottomEL",
+        "$props/name"
+      ]
+    }
+  },
+  "definitions": {
+    "defaultErrorEL": {
+      "name": [
+        "defaultErrorEL",
+        "$props/name"
+      ],
+      "component": "DetailsContainer",
+      "classes": "alert alert-danger border border-danger rounded p-4 m-3",
+      "labelClasses": "d-flex align-items-center gap-2",
+      "label": [
+        {
+          "name": "errorIconEL",
+          "component": "Icons",
+          "icon": "bug"
+        },
+        {
+          "tag": "strong",
+          "name": [
+            "errorLabelEL",
+            "$props/name"
+          ],
+          "content": [
+            "Error: ",
+            "$state/errorMessage"
+          ]
+        },
+        {
+          "name": [
+            "reload",
+            "$props/name"
+          ],
+          "component": "Action",
+          "classes": "btn-primary ms-auto",
+          "icon": "loop",
+          "content": "Reload"
+        }
+      ],
+      "content": {
+        "descriptionErrorEL": {
+          "name": [
+            "descriptionErrorEL",
+            "$props/name"
+          ],
+          "tag": "pre",
+          "classes": "text-bg-dark p-3 mt-3 rounded overflow-auto",
+          "content": "$state/error"
+        }
+      }
+    }
+  },
+  "rules": {
+    "$props/template": [
+      "iterate",
+      "$state/placeholderData",
+      "element"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "view": {
+    "iconContainer": {
+      "tag": "div",
+      "name": ["$props/name", "iconContainer"],
+      "content": {
+        "name": ["$props/name", "openIcon"],
+        "component": "Icons",
+        "icon": "$props/icon",
+        "classes": ["me-4 p-1 rounded-circle", "$props/iconClasses"],
+        "inline": false,
+        "style": {
+          "width": 30,
+          "height": 30
+        }
+      }
+    },
+    "hours": {
+      "tag": "div",
+      "name": ["$props/name", "hours"],
+      "classes": "d-grid gap-2",
+      "content": {
+        "label": {
+          "name": ["$props/name", "label"],
+          "content": "$props/label"
+        },
+        "list": {
+          "name": ["$props/name", "list"],
+          "wrapper": false,
+          "tag": false,
+          "content": "$state/hours"
+        }
+      }
+    },
+    "children": {
+      "name": "${props/name}-children",
+      "classes": "w-100 flex-basis-100",
+      "content": "<hr />"
+    }
+  },
+  "definitions": {
+    "hours": {
+      "name": ["$data/id", "$props/name", "hour"],
+      "tag": "span",
+      "content": "$data/buildHour"
+    },
+    "element": {
+      "name": ["$data/id", "$props/name", "$data/type"],
+      "tag": "b",
+      "content": "$data/value",
+      "context": "$data/context",
+      "format": "$data/format",
+      "formatConf": "$data/formatConf"
+    },
+    "message": {
+      "name": ["$data/id", "$props/name", "hourMessage"],
+      "tag": "span",
+      "content": "$data/message"
+    }
+  }
+}
