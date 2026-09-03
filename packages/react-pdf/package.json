@@ -1,6 +1,6 @@
 {
   "name": "@dblimp/react-pdf",
-  "version": "1.0.2-dev",
+  "version": "1.0.2",
   "description": "PDF generation using schemas with @react-pdf/renderer",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
