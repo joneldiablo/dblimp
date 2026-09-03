@@ -1,13 +1,13 @@
 import { eventHandler } from "@dblimp/core";
-import GoatComponent, {
-  GoatComponentProps,
-} from "@dblimp/core/goat-component";
+import JsonRenderComponent, {
+  JsonRenderComponentProps,
+} from "@dblimp/core/json-render-component";
 
 import schema from "./notifications.json";
 
 import "./style.scss";
 
-export interface NotificationsProps extends GoatComponentProps {
+export interface NotificationsProps extends JsonRenderComponentProps {
   open: boolean;
   type?:
     | "info"
@@ -25,12 +25,12 @@ export interface NotificationsProps extends GoatComponentProps {
   error?: any;
 }
 
-export default class Notifications extends GoatComponent<NotificationsProps> {
+export default class Notifications extends JsonRenderComponent<NotificationsProps> {
   static jsClass = "Notifications";
   static template = schema;
   static slots: string[] = [];
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     childrenIn: undefined,
     open: true,
     tagLabel: "h4",

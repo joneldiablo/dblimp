@@ -1,7 +1,7 @@
 import React, { JSX, FC, ExoticComponent } from "react";
 import Offcanvas from "bootstrap/js/dist/offcanvas";
 
-import { Goat } from "@dblimp/core";
+import { JsonRender } from "@dblimp/core";
 import { eventHandler, resolveRefs } from "@dblimp/core";
 
 import Component, { ComponentProps, ComponentState } from "../../component";
@@ -81,7 +81,7 @@ export default class OffcanvasContainer extends Component<
 
   bsEvents;
   schema;
-  goat;
+  jsonRender: JsonRender;
   offcanvas?: Offcanvas | null;
 
   /**
@@ -101,12 +101,12 @@ export default class OffcanvasContainer extends Component<
       localClasses: "offcanvas-" + props.position,
     });
 
-    // Resolve schema references and initialize Goat
+    // Resolve schema references and initialize JsonRender
     this.schema = resolveRefs(schema.view, {
       definitions: schema.definitions,
       props,
     });
-    this.goat = new Goat(props, this.mutations.bind(this));
+    this.jsonRender = new JsonRender(props, this.mutations.bind(this));
   }
 
   /**
@@ -249,7 +249,7 @@ export default class OffcanvasContainer extends Component<
       },
       { header: [], body: [], footer: [], content: [] }
     );
-    return this.goat.buildContent(this.schema);
+    return this.jsonRender.buildContent(this.schema);
   }
 
   /**

@@ -4,18 +4,18 @@ import eventHandler from "dbl-utils/event-handler";
 import { deepMerge } from "dbl-utils/object-mutation";
 import resolveRefs from "dbl-utils/resolve-refs";
 
-import Goat from "./goat";
+import JsonRender from "./json-render";
 import Component, { ComponentProps, ComponentState } from "./component";
 
-export interface GoatComponentProps extends ComponentProps {
+export interface JsonRenderComponentProps extends ComponentProps {
   view?: any;
-  childrenIn?: boolean;
+  childrenIn?: boolean | string;
   definitions?: Record<string, any>;
   content?: string | any[] | object;
   children?: ReactNode;
 }
 
-export interface GoatComponentState extends ComponentState {
+export interface JsonRenderComponentState extends ComponentState {
   [key: string]: any;
 }
 
@@ -25,17 +25,17 @@ export interface ComponentTemplateSchema {
   rules?: Record<string, any>;
 }
 
-export default class GoatComponent<
-  TProps extends GoatComponentProps = GoatComponentProps,
-  TState extends GoatComponentState = GoatComponentState
+export default class JsonRenderComponent<
+  TProps extends JsonRenderComponentProps = JsonRenderComponentProps,
+  TState extends JsonRenderComponentState = JsonRenderComponentState
 > extends Component<TProps, TState> {
-  static jsClass = "GoatComponent";
+  static jsClass = "JsonRenderComponent";
   static template?: ComponentTemplateSchema | null = {
     view: {},
     definitions: {}
   };
 
-  static defaultProps: Partial<GoatComponentProps> = {
+  static defaultProps: Partial<JsonRenderComponentProps> = {
     ...Component.defaultProps,
     view: null,
     childrenIn: false,
@@ -43,14 +43,15 @@ export default class GoatComponent<
   };
 
   protected events: [string, (...args: any[]) => void][] = [];
-  protected goat: Goat;
+  protected jsonRender: JsonRender;
   protected templateSolved: any;
 
   constructor(props: TProps) {
     super(props);
     this.tag = "div";
     Object.assign(this.state, {});
-    this.goat = new Goat(this.fixedProps, this.mutations.bind(this));
+    this.jsonRender = new JsonRender(this.fixedProps, this.mutations.bind(this));
+    this.jsonRender.childrenIn = this.childrenIn;
     this.evalTemplate();
   }
 
@@ -63,11 +64,11 @@ export default class GoatComponent<
   }
 
   get theView(): any {
-    return (this.constructor as typeof GoatComponent).template?.view;
+    return (this.constructor as typeof JsonRenderComponent).template?.view;
   }
 
   get theTemplate(): any {
-    return (this.constructor as typeof GoatComponent).template || {};
+    return (this.constructor as typeof JsonRenderComponent).template || {};
   }
 
   componentDidMount(): void {
@@ -108,7 +109,7 @@ export default class GoatComponent<
   content(children = this.props.children): any {
     if (!this.templateSolved) return null;
 
-    const builded = this.goat.buildContent(this.templateSolved);
+    const builded = this.jsonRender.buildContent(this.templateSolved);
     return !this.childrenIn ? (
       <>
         {builded}
@@ -119,4 +120,3 @@ export default class GoatComponent<
     );
   }
 }
-

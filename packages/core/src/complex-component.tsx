@@ -1,7 +1,7 @@
 import React from "react";
 import { resolveRefs, eventHandler } from "dbl-utils";
 
-import Goat from "./goat";
+import JsonRender from "./json-render";
 import Component, { ComponentProps, ComponentState } from "./component";
 
 /**
@@ -54,7 +54,7 @@ const schemaDefault: BasicSchemaType = {
 };
 
 /**
- * Component capable of rendering a JSON schema using {@link Goat}.
+ * Component capable of rendering a JSON schema using {@link JsonRender}.
  */
 export default class ComplexComponent<
   TProps extends ComplexComponentProps = ComplexComponentProps,
@@ -70,11 +70,11 @@ export default class ComplexComponent<
   };
 
   protected events: [string, (...args: any[]) => void][] = [];
-  protected goat: Goat;
+  protected jsonRender: JsonRender;
 
   constructor(props: TProps) {
     super(props);
-    this.goat = new Goat(props, this.mutations.bind(this));
+    this.jsonRender = new JsonRender(props, this.mutations.bind(this));
     Object.assign(this.state, {
       view: this.buildView(),
     });
@@ -109,7 +109,7 @@ export default class ComplexComponent<
    */
   content(children: React.ReactNode = this.props.children): React.ReactNode {
     const { childrenIn } = this.props;
-    const content = this.goat.buildContent(this.state.view);
+    const content = this.jsonRender.buildContent(this.state.view);
     return (
       <>
         {content}

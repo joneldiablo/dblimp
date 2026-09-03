@@ -25,7 +25,7 @@ import { RouteProps } from "./react-router-schema/route";
 // Global state kept in memory
 const GLOBAL_STATE: Record<string, any> = {};
 
-export interface RequestAppGoat extends RequestInit {
+export interface RequestApp extends RequestInit {
   query?: Record<string, any>;
   format?: 'raw' | 'json' | 'text' | 'blob' | 'arrayBuffer' | 'formData';
   timeout?: number;
@@ -33,18 +33,19 @@ export interface RequestAppGoat extends RequestInit {
 }
 
 /**
- * Constructor properties for `AppGoatController`.
+ * Constructor properties for `AppController`.
  */
-export interface AppGoatControllerProps {
+export interface AppControllerProps {
   icons?: { icons: any[]; } | false;
   controllers?: Record<string, typeof Controller<any, any>>;
   components?: Record<string, Record<string, React.FC<any> | typeof React.Component<any, any>>>;
   definitions?: Array<any> | Record<string, any>;
+  rules?: Array<any> | Record<string, any>;
   routes?: Array<RouteSchema>;
   schema?: RouteSchema;
   api?: string;
   apiHeaders?: Record<string, string> | string;
-  fetchBefore?: (url: string, options: RequestAppGoat) => RequestAppGoat;
+  fetchBefore?: (url: string, options: RequestApp) => RequestApp;
   fetchAfter?: (res: any) => any;
   fetchError?: (error: any, url: string) => any;
   maxTimeout?: number;
@@ -62,15 +63,16 @@ export interface AppGoatControllerProps {
 export interface RouteSchema {
   view: Record<string, any>;
   definitions?: Record<string, any>;
+  rules?: Record<string, any>;
   routes?: Record<string, RouteSchema> | RouteSchema[] | Array<RouteSchema | string>;
   data?: any;
 }
 
-export class AppGoatAbortController extends AbortController {
+export class AppAbortController extends AbortController {
   timeoutId?: NodeJS.Timeout;
 }
 
-export class AppGoatError extends Error {
+export class AppError extends Error {
   error?: boolean = true;
 }
 
@@ -79,17 +81,20 @@ export class AppGoatError extends Error {
  *
  * @example
  * ```ts
- * const app = new AppGoatController();
+ * const app = new AppController();
  * app.set("token", "123");
  * ```
  */
-export class AppGoatController {
+export class AppController {
 
   // Stores AbortControllers for active requests
-  fetchList: Record<string, AppGoatAbortController> = {};
+  fetchList: Record<string, AppAbortController> = {};
 
   // Stores global definitions
   globalDefinitions: Array<any> = [];
+
+  // Stores global rules
+  globalRules: Array<any> = [];
 
   // Stores routes indexed by view name
   routes: Record<string, any> = {};
@@ -104,7 +109,7 @@ export class AppGoatController {
   random: string = randomS4();
 
   // Properties passed to the controller
-  props?: AppGoatControllerProps;
+  props?: AppControllerProps;
 
   // Prefix used for local and session storage
   prefixStorage: string = '_gs.';
@@ -112,18 +117,19 @@ export class AppGoatController {
   // Optional function to update external state
   update?: (key: string) => void;
 
-  constructor(props?: AppGoatControllerProps) {
+  constructor(props?: AppControllerProps) {
     if (props) this.init(props);
   }
 
   /**
-   * Initializes the AppGoatController configuration.
+   * Initializes the AppController configuration.
    *
    * @param props - Initial properties to configure the application.
    */
-  init(props: AppGoatControllerProps = {}): void {
+  init(props: AppControllerProps = {}): void {
     const {
       definitions = [],
+      rules = [],
       routes = [],
       fields = {},
       components = {},
@@ -155,6 +161,7 @@ export class AppGoatController {
     // Save complete initial properties
     this.props = {
       definitions,
+      rules,
       routes,
       fields,
       components,
@@ -182,6 +189,10 @@ export class AppGoatController {
     // Combine initial global definitions
     this.globalDefinitions.push(
       ...(Array.isArray(definitions) ? definitions : [definitions])
+    );
+
+    this.globalRules.push(
+      ...(Array.isArray(rules) ? rules : [rules])
     );
 
     // Index routes by view name and warn about overwrites
@@ -247,8 +258,15 @@ export class AppGoatController {
     // Merge global definitions with the current schema's definitions
     const newDefs = deepMerge({}, ...this.globalDefinitions, schema.definitions || {});
 
-    // Resolve view internal references using combined definitions
-    const view = resolveRefs(schema.view, { definitions: newDefs, data: schema.data || {} });
+    // Merge global rules with the current schema's rules
+    const newRules = deepMerge({}, ...this.globalRules, schema.rules || {});
+
+    // Resolve view internal references using combined definitions and rules
+    const view = resolveRefs(
+      schema.view,
+      { definitions: newDefs, data: schema.data || {} },
+      newRules
+    );
 
     // Process nested routes if present
     if (schema.routes?.length) {
@@ -507,7 +525,7 @@ export class AppGoatController {
    */
   fetch(
     url: string,
-    options: RequestAppGoat & {
+    options: RequestApp & {
       query?: Record<string, any>;
       format?: 'json' | 'text' | 'blob' | 'raw';
       timeout?: number;
@@ -533,7 +551,7 @@ export class AppGoatController {
       ...confraw
     } = this.props!.fetchBefore!(url, options);
 
-    const conf = confraw as RequestAppGoat;
+    const conf = confraw as RequestApp;
     if (body) conf.body = JSON.stringify(body);
 
     // Build final URL with query params
@@ -549,7 +567,7 @@ export class AppGoatController {
 
     // Handle timeout with custom AbortController
     if (timeout) {
-      const abortCtrl = new AppGoatAbortController();
+      const abortCtrl = new AppAbortController();
       this.fetchList[requestKey] = abortCtrl;
       conf.signal = abortCtrl.signal;
 
@@ -590,7 +608,7 @@ export class AppGoatController {
       .catch(e => {
         e.error = true;
         if (e.name === 'AbortError') {
-          const timeoutErr = new AppGoatError('timeout');
+          const timeoutErr = new AppError('timeout');
           timeoutErr.message = 'timeout';
           timeoutErr.error = true;
           return this.props!.fetchError!(timeoutErr, url);
@@ -628,4 +646,4 @@ export class AppGoatController {
 
 }
 
-export default new AppGoatController();
+export default new AppController();

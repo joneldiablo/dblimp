@@ -5,7 +5,7 @@ import { addComponents } from "./components";
 import Container from "./containers/container";
 import DetailsContainer from "./containers/details-container";
 import FormContainer from "./containers/form-container";
-import GoatContainer from "./containers/goat-container";
+import JsonRenderContainer from "./containers/json-render-container";
 import GridContainer from "./containers/grid-container";
 import ListContainer from "./containers/list-container";
 import AutoResponsiveContainer from "./containers/auto-responsive-container";
@@ -28,7 +28,7 @@ const CONTAINERS: Record<
   FetchContainer,
   FlexContainer,
   FormContainer,
-  GoatContainer,
+  JsonRenderContainer,
   GridContainer,
   GridSwitchContainer,
   ListContainer,

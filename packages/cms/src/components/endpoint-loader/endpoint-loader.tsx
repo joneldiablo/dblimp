@@ -1,8 +1,8 @@
 import { deepMerge, resolveRefs, eventHandler, appCtrl } from "@dblimp/core";
-import GoatComponent, {
-  GoatComponentProps,
-  GoatComponentState,
-} from "@dblimp/core/goat-component";
+import JsonRenderComponent, {
+  JsonRenderComponentProps,
+  JsonRenderComponentState,
+} from "@dblimp/core/json-render-component";
 
 import schema from "./endpoint-loader.json";
 import "./endpoint-loader.scss";
@@ -22,14 +22,14 @@ export type placeholderData = Record<string, any> & {
 export type hasImgPlaceholder = boolean | undefined;
 export type isMedia = boolean | undefined;
 
-export interface EndpointLoaderProps extends GoatComponentProps {
+export interface EndpointLoaderProps extends JsonRenderComponentProps {
   method: string;
   endpoint: string;
   fetchOptions?: Record<string, any>;
   placeholderData: placeholderData | placeholderData[];
-  errorTemplate?: GoatComponentProps;
-  template: GoatComponentProps;
-  emptyTemplate?: GoatComponentProps;
+  errorTemplate?: JsonRenderComponentProps;
+  template: JsonRenderComponentProps;
+  emptyTemplate?: JsonRenderComponentProps;
   rules?: Record<string, [string, ...any]>;
   gridClasses?: string | string[];
   colClasses?: string | string[];
@@ -38,21 +38,21 @@ export interface EndpointLoaderProps extends GoatComponentProps {
   dataPath: string;
 }
 
-export interface EndpointLoaderState extends GoatComponentState {
+export interface EndpointLoaderState extends JsonRenderComponentState {
   data?: any;
   error?: boolean;
   placeholderData: placeholderData[];
   isLoading?: boolean;
 }
 
-export default class EndpointLoader extends GoatComponent<
+export default class EndpointLoader extends JsonRenderComponent<
   EndpointLoaderProps,
   EndpointLoaderState
 > {
   static jsClass = "EndpointLoader";
   static template = schema;
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     endpoint: "",
     fetchOptions: {},
     placeholderData: [{ id: 1 }, { id: 2 }, { id: 3 }],
@@ -269,7 +269,7 @@ export default class EndpointLoader extends GoatComponent<
   }
 
   evalTemplate() {
-    const Constructor = this.constructor as typeof GoatComponent;
+    const Constructor = this.constructor as typeof JsonRenderComponent;
     const definitions = deepMerge(
       Constructor.template?.definitions || {},
       this.props.definitions

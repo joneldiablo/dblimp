@@ -4,24 +4,19 @@ import eventHandler from "dbl-utils/event-handler";
 import { deepMerge } from "dbl-utils/object-mutation";
 import resolveRefs from "dbl-utils/resolve-refs";
 
-import Goat from "../goat";
+import JsonRender from "../json-render";
 import Container, { ContainerProps, ContainerState } from "./container";
 
 /**
- * Props for {@link GoatContainer}.
- *
- * @example
- * ```tsx
- * <GoatContainer name="sample" view={{ name: "test", component: "Component", content: "Hi" }} />
- * ```
+ * Props for {@link JsonRenderContainer}.
  */
-export interface GoatContainerProps extends ContainerProps {
+export interface JsonRenderContainerProps extends ContainerProps {
   /** Whether the container should take the full width available. */
   fullWidth?: boolean;
-  /** View schema to render using {@link Goat}. */
+  /** View schema to render using {@link JsonRender}. */
   view?: any;
   /** If true, children are rendered inside the generated content. */
-  childrenIn?: boolean;
+  childrenIn?: boolean | string;
   /** Additional JSON schema definitions. */
   definitions?: Record<string, any>;
   /** Direct content passed to the container. */
@@ -31,9 +26,9 @@ export interface GoatContainerProps extends ContainerProps {
 }
 
 /**
- * State for {@link GoatContainer}.
+ * State for {@link JsonRenderContainer}.
  */
-export interface GoatContainerState extends ContainerState {
+export interface JsonRenderContainerState extends ContainerState {
   [key: string]: any;
 }
 
@@ -46,19 +41,19 @@ export interface ContainerTemplateSchema {
 }
 
 /**
- * Container capable of rendering a JSON schema using {@link Goat}.
+ * Container capable of rendering a JSON schema using {@link JsonRender}.
  */
-export default class GoatContainer<
-  TProps extends GoatContainerProps = GoatContainerProps,
-  TState extends GoatContainerState = GoatContainerState
+export default class JsonRenderContainer<
+  TProps extends JsonRenderContainerProps = JsonRenderContainerProps,
+  TState extends JsonRenderContainerState = JsonRenderContainerState
 > extends Container<TProps, TState> {
-  static jsClass = "GoatContainer";
+  static jsClass = "JsonRenderContainer";
   static template?: ContainerTemplateSchema | null = {
     view: {},
     definitions: {},
   };
 
-  static defaultProps: Partial<GoatContainerProps> = {
+  static defaultProps: Partial<JsonRenderContainerProps> = {
     ...Container.defaultProps,
     fullWidth: true,
     view: null,
@@ -67,7 +62,7 @@ export default class GoatContainer<
   };
 
   protected events: [string, (...args: any[]) => void][] = [];
-  protected goat: Goat;
+  protected jsonRender: JsonRender;
   protected templateSolved: any;
 
   constructor(props: TProps) {
@@ -75,7 +70,8 @@ export default class GoatContainer<
     this.state = this.state as TState;
     this.tag = "div";
     Object.assign(this.state, {});
-    this.goat = new Goat(this.fixedProps, this.mutations.bind(this));
+    this.jsonRender = new JsonRender(this.fixedProps, this.mutations.bind(this));
+    this.jsonRender.childrenIn = this.childrenIn;
   }
 
   get fixedProps(): TProps {
@@ -87,11 +83,11 @@ export default class GoatContainer<
   }
 
   get theView(): any {
-    return (this.constructor as typeof GoatContainer).template?.view;
+    return (this.constructor as typeof JsonRenderContainer).template?.view;
   }
 
   get theTemplate(): any {
-    return (this.constructor as typeof GoatContainer).template || {};
+    return (this.constructor as typeof JsonRenderContainer).template || {};
   }
 
   componentDidMount(): void {
@@ -137,12 +133,12 @@ export default class GoatContainer<
   }
 
   /**
-   * Builds content using {@link Goat} and optionally renders children inside.
+   * Builds content using {@link JsonRender} and optionally renders children inside.
    */
   content(children = this.props.children): any {
     if (!(this.breakpoint && this.templateSolved)) return this.waitBreakpoint;
 
-    const builded = this.goat.buildContent(this.templateSolved);
+    const builded = this.jsonRender.buildContent(this.templateSolved);
     return !this.childrenIn ? (
       <>
         {builded}

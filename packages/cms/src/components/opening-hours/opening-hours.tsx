@@ -1,9 +1,9 @@
 import hash from "object-hash";
 
-import GoatComponent, {
-  GoatComponentProps,
-  GoatComponentState,
-} from "@dblimp/core/goat-component";
+import JsonRenderComponent, {
+  JsonRenderComponentProps,
+  JsonRenderComponentState,
+} from "@dblimp/core/json-render-component";
 import { deepMerge, resolveRefs } from "@dblimp/core";
 
 import schema from "./opening-hours.json";
@@ -11,26 +11,26 @@ import "./opening-hours.scss";
 
 type TClasses = string | string[];
 
-export interface OpeningHoursProps extends GoatComponentProps {
+export interface OpeningHoursProps extends JsonRenderComponentProps {
   icon?: string;
   iconClasses?: TClasses | TClasses[];
   hours?: any[];
   interval: boolean;
 }
 
-export interface OpeningHoursState extends GoatComponentState {
+export interface OpeningHoursState extends JsonRenderComponentState {
   hours: { days: (string | number)[]; hours: (string | number)[] }[];
 }
 
 export default class OpeningHours<
   TProps extends OpeningHoursProps = OpeningHoursProps,
   TState extends OpeningHoursState = OpeningHoursState
-> extends GoatComponent<OpeningHoursProps, OpeningHoursState> {
+> extends JsonRenderComponent<OpeningHoursProps, OpeningHoursState> {
   static jsClass = "OpeningHours";
   static template = schema;
   static slots: string[] = [];
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     childrenIn: undefined,
     interval: true,
     hours: [],

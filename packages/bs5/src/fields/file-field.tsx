@@ -3,7 +3,7 @@ import bytes from "bytes";
 import LZMA from "lzma";
 
 import { eventHandler, extractNodeString } from "@dblimp/core";
-import { Goat } from "@dblimp/core";
+import { JsonRender } from "@dblimp/core";
 
 import Field, { FieldProps, FieldState } from "./field";
 
@@ -21,7 +21,7 @@ export default class FileField extends Field<FileFieldProps, FileFieldState> {
 
   static jsClass = "FileField";
 
-  goat;
+  jsonRender!: JsonRender;
 
   constructor(props: FileFieldProps) {
     super(props);
@@ -33,7 +33,7 @@ export default class FileField extends Field<FileFieldProps, FileFieldState> {
       Object.assign(this.state, { localClasses: "cursor-pointer" });
     if (props.mutations) {
       const { mutations, ...propsSub } = props;
-      this.goat = new Goat(propsSub, mutations);
+      this.jsonRender = new JsonRender(propsSub, mutations);
     }
   }
 
@@ -191,8 +191,8 @@ export default class FileField extends Field<FileFieldProps, FileFieldState> {
             .pop()
             .split("?")[0];
         else nameFile = lrename.name;
-        if (this.goat)
-          return this.goat.buildContent({
+        if (this.jsonRender)
+          return this.jsonRender.buildContent({
             name: `${this.props.name}.file.${i}`,
             tag: "span",
             value: l,

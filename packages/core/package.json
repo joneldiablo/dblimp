@@ -16,10 +16,20 @@
       "types": "./dist/types/component.d.ts",
       "source": "./src/component.tsx"
     },
-    "./goat": {
-      "import": "./dist/esm/goat.js",
-      "types": "./dist/types/goat.d.ts",
-      "source": "./src/goat.tsx"
+    "./json-render": {
+      "import": "./dist/esm/json-render.js",
+      "types": "./dist/types/json-render.d.ts",
+      "source": "./src/json-render.tsx"
+    },
+    "./json-render-component": {
+      "import": "./dist/esm/json-render-component.js",
+      "types": "./dist/types/json-render-component.d.ts",
+      "source": "./src/json-render-component.tsx"
+    },
+    "./json-render-container": {
+      "import": "./dist/esm/containers/json-render-container.js",
+      "types": "./dist/types/containers/json-render-container.d.ts",
+      "source": "./src/containers/json-render-container.tsx"
     },
     "./components": {
       "import": "./dist/esm/components.js",

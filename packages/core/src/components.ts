@@ -1,7 +1,7 @@
 import React from "react";
 
 import Component from "./component";
-import GoatComponent from "./goat-component";
+import JsonRenderComponent from "./json-render-component";
 import containers from "./containers";
 import fields from "./fields";
 import mediaComponents from "./media";
@@ -9,7 +9,7 @@ import navigationComponents from "./navigation";
 import Route from "./react-router-schema/route";
 
 export * from "./component";
-export * from "./goat-component";
+export * from "./json-render-component";
 export * from "./containers";
 export * from "./fields";
 export * from "./media";
@@ -17,14 +17,14 @@ export * from "./navigation";
 export * from "./react-router-schema/route";
 
 /**
- * Registry of available React components used by `Goat`.
+ * Registry of available React components used by `JsonRender`.
  */
 const COMPONENTS: Record<
   string,
   React.FC<any> | typeof React.Component<any, any>
 > = {
   Component,
-  GoatComponent,
+  JsonRenderComponent,
   ...containers,
   ...fields,
   ...mediaComponents,

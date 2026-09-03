@@ -9,7 +9,7 @@ import {
   splitAndFlat,
 } from "@dblimp/core";
 import Icons from "@dblimp/icomoon";
-import { Goat } from "@dblimp/core";
+import { JsonRender } from "@dblimp/core";
 import FloatingContainer, {
   FloatingContainerProps,
 } from "@dblimp/floating";
@@ -86,7 +86,7 @@ export const FORMATS: Record<
     raw: any,
     rawprops: any,
     data: any,
-    goat: Goat,
+    jsonRender: JsonRender,
     colName: string
   ) => React.ReactNode
 > = {
@@ -97,7 +97,7 @@ export const FORMATS: Record<
    * @param {any} raw - Los datos en crudo que deben ser formateados.
    * @param {Object} props - Propiedades del componente.
    * @param {Object} data - Datos de la celda.
-   * @param {Object} goat - Instancia de JsonRender.
+   * @param {Object} jsonRender - Instancia de JsonRender.
    * @param {String} colName - Nombre de la columna.
    * @returns {React.Component} El componente formateado.
    */
@@ -105,7 +105,7 @@ export const FORMATS: Record<
     raw: any,
     rawprops: any,
     data: any,
-    goat: Goat,
+    jsonRender: JsonRender,
     colName: string
   ) => {
     const props = resolveRefs(rawprops, { data });
@@ -118,7 +118,7 @@ export const FORMATS: Record<
     props.id = data.id;
     props.data = data;
     props.columnName = colName;
-    return goat.buildContent(props);
+    return jsonRender.buildContent(props);
   },
   /**
    * Formatea los datos en crudo a una fecha.
@@ -500,13 +500,13 @@ export default class Table extends Component<TableProps> {
     tbody: {},
   };
 
-  goat;
+  jsonRender;
   events?: [string, (data: any) => void][];
 
   constructor(props: TableProps) {
     super(props);
     const { mutations, ...propsJ } = props;
-    this.goat = new Goat(propsJ, mutations);
+    this.jsonRender = new JsonRender(propsJ, mutations);
     Object.assign(this.state, {
       dropFilters: {},
       headerRefs: {},
@@ -602,7 +602,7 @@ export default class Table extends Component<TableProps> {
     } = this.props;
     const { orderBy } = this.state as any;
     col.name = col.name || key;
-    col.label = this.goat.buildContent(col.label);
+    col.label = this.jsonRender.buildContent(col.label);
     const props: HeaderCellProps = {
       col,
       orderable,
@@ -743,7 +743,7 @@ export default class Table extends Component<TableProps> {
     const cell = React.createElement(
       "div",
       { ...cellAttrs },
-      formater(cellData, formatOptions || col, rowData, this.goat, colName)
+      formater(cellData, formatOptions || col, rowData, this.jsonRender, colName)
     );
     return colName === "id"
       ? React.createElement(
@@ -877,7 +877,7 @@ export default class Table extends Component<TableProps> {
                     if (typeof fix === "string" || !colF) {
                       renderColumn = (
                         <React.Fragment key={"custom" + icol}>
-                          {this.goat.buildContent(fix)}
+                          {this.jsonRender.buildContent(fix)}
                         </React.Fragment>
                       );
                     } else {

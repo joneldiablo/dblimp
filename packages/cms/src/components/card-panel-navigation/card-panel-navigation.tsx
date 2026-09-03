@@ -1,24 +1,24 @@
 import { Location } from "react-router";
 
-import GoatComponent, {
-  GoatComponentProps,
-} from "@dblimp/core/goat-component";
+import JsonRenderComponent, {
+  JsonRenderComponentProps,
+} from "@dblimp/core/json-render-component";
 
 import { findScrollableParent } from "../../utils/find-scrollable-parent";
 import schema from "./card-panel-navigation.json";
 import "./style.scss";
 
-export interface CardPanelNavigationProps extends GoatComponentProps {
+export interface CardPanelNavigationProps extends JsonRenderComponentProps {
   location: any;
   basePath: string;
 }
 
-export default class CardPanelNavigation extends GoatComponent<CardPanelNavigationProps> {
+export default class CardPanelNavigation extends JsonRenderComponent<CardPanelNavigationProps> {
   static jsClass = "CardPanelNavigation";
   static template = schema;
   static slots: string[] = [];
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     childrenIn: undefined,
   };
 

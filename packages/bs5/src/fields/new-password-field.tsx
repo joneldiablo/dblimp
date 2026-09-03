@@ -2,7 +2,7 @@ import React from "react";
 
 import { eventHandler } from "@dblimp/core";
 
-import { Goat } from "@dblimp/core";
+import { JsonRender } from "@dblimp/core";
 import Field, { FieldProps, FieldState } from "./field";
 import NoWrapField from "./no-wrap-field";
 
@@ -35,12 +35,12 @@ export default class NewPasswordField extends Field<
     dividerClasses: "mb-3",
   };
 
-  goat;
+  jsonRender: JsonRender;
 
   constructor(props: NewPasswordFieldProps) {
     super(props);
     const { mutations, ...jProps } = props;
-    this.goat = new Goat(jProps, mutations);
+    this.jsonRender = new JsonRender(jProps, mutations);
   }
 
   get type() {
@@ -102,7 +102,7 @@ export default class NewPasswordField extends Field<
               .map(
                 ([k, { pattern, errorMessage }]: any) =>
                   !value.match(pattern) && (
-                    <li>{this.goat.buildContent(errorMessage)}</li>
+                    <li>{this.jsonRender.buildContent(errorMessage)}</li>
                   )
               )
               .filter((p) => !!p)

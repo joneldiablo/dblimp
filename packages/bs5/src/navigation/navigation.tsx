@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Collapse from "bootstrap/js/dist/collapse";
 
 import { eventHandler, deepMerge, splitAndFlat, extractNodeString } from "@dblimp/core";
-import Goat from "@dblimp/core/goat";
+import JsonRender from "@dblimp/core/json-render";
 import Icons from "@dblimp/icomoon";
 import Component, { ComponentProps, ComponentState } from "@dblimp/core/component";
 import FloatingContainer from "@dblimp/floating";
@@ -86,7 +86,7 @@ export default class Navigation<
   protected flatItems: Record<string, TItem> = {};
   protected collapses = createRef<Record<string, any>>();
   protected itemsRefs = createRef<Record<string, any>>();
-  protected goat: Goat;
+  protected jsonRender: JsonRender;
   protected activeItem?: TItem;
   protected pathname?: string;
 
@@ -103,7 +103,7 @@ export default class Navigation<
 
     this.collapses.current = {};
     this.itemsRefs.current = {};
-    this.goat = new Goat(props);
+    this.jsonRender = new JsonRender(props);
 
     this.hide = this.hide.bind(this);
     this.link = this.link.bind(this);
@@ -403,8 +403,8 @@ export default class Navigation<
       <span>
         {item.content
           ? open
-            ? this.goat.buildContent((item.content as Array<any>)[0])
-            : this.goat.buildContent((item.content as Array<any>)[1])
+            ? this.jsonRender.buildContent((item.content as Array<any>)[0])
+            : this.jsonRender.buildContent((item.content as Array<any>)[1])
           : (
             <>
               {item.icon !== false && (
@@ -416,7 +416,7 @@ export default class Navigation<
                   {...deepMerge(this.props.iconProps || {}, item.iconProps || {})}
                 />
               )}
-              {(open || !!parent) && <span className="label">{this.goat.buildContent(item.label)}</span>}
+              {(open || !!parent) && <span className="label">{this.jsonRender.buildContent(item.label)}</span>}
             </>
           )}
       </span>

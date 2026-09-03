@@ -1,8 +1,8 @@
 import { deepMerge, resolveRefs } from "@dblimp/core";
-import GoatComponent, {
-  GoatComponentProps,
-  GoatComponentState,
-} from "@dblimp/core/goat-component";
+import JsonRenderComponent, {
+  JsonRenderComponentProps,
+  JsonRenderComponentState,
+} from "@dblimp/core/json-render-component";
 
 import { resolveSrc } from "../../utils/assets";
 
@@ -10,7 +10,7 @@ import "./card-service.scss";
 
 import schema from "./card-service.json";
 
-export interface CardServiceProps extends GoatComponentProps {
+export interface CardServiceProps extends JsonRenderComponentProps {
   name: string;
   imgSrc?: string;
   icon?: string;
@@ -23,9 +23,9 @@ export interface CardServiceProps extends GoatComponentProps {
   ctaTo?: string;
 }
 
-export interface CardServiceState extends GoatComponentState {}
+export interface CardServiceState extends JsonRenderComponentState {}
 
-export default class CardService extends GoatComponent<
+export default class CardService extends JsonRenderComponent<
   CardServiceProps,
   CardServiceState
 > {
@@ -33,7 +33,7 @@ export default class CardService extends GoatComponent<
   static template = schema;
   static slots = ["description", "list"];
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     label: "",
     description: "",
     list: [],

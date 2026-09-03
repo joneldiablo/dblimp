@@ -20,10 +20,10 @@ const excludeSectionWrapper: string[] = [
  *
  * @example
  * ```ts
- * addWrapperExclusions(["CustomComponent"]);
+ * addExclusions(["CustomComponent"]);
  * ```
  */
-export function addWrapperExclusions(exclusion: string | string[]): void {
+export function addExclusions(exclusion: string | string[]): void {
   excludeSectionWrapper.push(...[exclusion].flat());
 }
 
@@ -32,11 +32,11 @@ export function addWrapperExclusions(exclusion: string | string[]): void {
  *
  * @example
  * ```tsx
- * const goat = new Goat({ name: "root" });
- * goat.buildContent({ name: "greeting", component: "Component", content: "Hi" });
+ * const jsonRender = new JsonRender({ name: "root" });
+ * jsonRender.buildContent({ name: "greeting", component: "Component", content: "Hi" });
  * ```
  */
-export default class Goat {
+export default class JsonRender {
   protected parseOpts = {
     replace: (domNode: any) => {
       let C7tReplace: React.ElementType | undefined;
@@ -75,9 +75,9 @@ export default class Goat {
   };
 
   protected actualSections: any[] = [];
-  protected props: any;
-  protected mutations?: Function;
-  protected childrenIn: any;
+  props: any;
+  mutations?: Function;
+  childrenIn: any;
 
   constructor(props: any, mutations?: Function) {
     this.props = props;
@@ -102,7 +102,7 @@ export default class Goat {
       } else if (typeof translate === 'string') {
         let parsed = parseReact(translate, this.parseOpts);
         if (typeof parsed === 'string') parsed = formatValue(parsed, section);
-        return <React.Fragment key={hash(translate)} >
+        return <React.Fragment key={[index || '0', section?.name, hash(translate)].filter(Boolean).join('-')} >
           {parsed}
         </React.Fragment>;
       }
@@ -133,7 +133,6 @@ export default class Goat {
    * @param i - Optional index used as key.
    */
   protected sections(sr: any, i?: number): React.ReactNode {
-
     const m = (typeof this.mutations === 'function' && this.mutations(sr.name, sr)) || {};
     if (m.style && sr.style) m.style = deepMerge({}, sr.style, m.style);
     if (m._props && sr._props) m._props = deepMerge({}, sr._props, m._props);

@@ -1,13 +1,13 @@
-import GoatComponent, {
-  GoatComponentProps,
-  GoatComponentState,
-} from "@dblimp/core/goat-component";
+import JsonRenderComponent, {
+  JsonRenderComponentProps,
+  JsonRenderComponentState,
+} from "@dblimp/core/json-render-component";
 
 import "./card-plans.scss";
 
 import schema from "./card-plans.json";
 
-export interface CardPlansProps extends GoatComponentProps {
+export interface CardPlansProps extends JsonRenderComponentProps {
   name: string;
   price?: string;
   description?: string;
@@ -22,9 +22,9 @@ export interface CardPlansProps extends GoatComponentProps {
   listClasses?: string;
 }
 
-export interface CardPlansState extends GoatComponentState {}
+export interface CardPlansState extends JsonRenderComponentState {}
 
-export default class CardPlans extends GoatComponent<
+export default class CardPlans extends JsonRenderComponent<
   CardPlansProps,
   CardPlansState
 > {
@@ -32,7 +32,7 @@ export default class CardPlans extends GoatComponent<
   static template = schema;
   static slots = ["description", "list"];
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     classes: "card h-100 text-dark shadow-sm",
     label: "",
     price: "",
