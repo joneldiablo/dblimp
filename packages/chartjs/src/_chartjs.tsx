@@ -12,12 +12,12 @@ import {
 } from "react-chartjs-2";
 import { ChartTypeRegistry, CoreChartOptions } from "chart.js";
 
-import { eventHandler } from "@dblimp/core";
-
-import ProportionalContainer, {
+import {
+  eventHandler,
+  ProportionalContainer,
   ProportionalContainerProps,
   ProportionalContainerState,
-} from "@dblimp/core/containers/proportional-container";
+} from "@dblimp/core";
 import { Icons } from "@dblimp/icomoon";
 
 const graphs: Record<string, React.ComponentType<any>> = {
@@ -46,12 +46,13 @@ export const addGraphs = (
   Object.assign(graphs, moreGraphs);
 };
 
-export interface ChartjsProps<ChartType extends keyof ChartTypeRegistry>
-  extends ProportionalContainerProps {
+export interface ChartjsProps<
+  ChartType extends keyof ChartTypeRegistry = any
+> extends ProportionalContainerProps {
   /** Data set for the graph. */
   data: any[] | Record<string, any>;
   /** Chart.js options object. */
-  options?: CoreChartOptions<ChartType>;
+  options?: any;
   /** List of Chart.js plugins. */
   plugins?: any[];
   /** Key to identify datasets. */
@@ -82,7 +83,7 @@ export interface ChartjsState extends ProportionalContainerState {}
  * ```
  */
 export default class Chartjs<
-  TProps extends ChartjsProps<keyof ChartTypeRegistry> = ChartjsProps<"bar">,
+  TProps extends ChartjsProps<any> = ChartjsProps<"bar">,
   TState extends ChartjsState = ChartjsState
 > extends ProportionalContainer<TProps, TState> {
   static jsClass = "Chartjs";
@@ -128,7 +129,7 @@ export default class Chartjs<
   content(children: React.ReactNode = this.props.children) {
     if (!this.breakpoint) return this.waitBreakpoint;
 
-    const options = { ...(this.props.options || {}) };
+    const options: Record<string, any> = { ...(this.props.options || {}) };
     const ratioValue =
       Number(
         typeof this.props.ratio === "object"

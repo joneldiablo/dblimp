@@ -6,9 +6,13 @@
     "module": "CommonJS",
     "rootDir": "./src",
     "declaration": true,
-    "moduleResolution": "node16"
+    "moduleResolution": "node",
+    "paths": {
+      "@dblimp/core": ["packages/core/dist/types/index"],
+      "@dblimp/core/*": ["packages/core/dist/types/*"],
+      "@dblimp/icomoon": ["packages/icomoon/dist/types/index"]
+    },
+    "baseUrl": "../.."
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }

@@ -1,0 +1,134 @@
+import React from "react";
+import {
+  ComplexComponent,
+  ComplexComponentProps,
+  ComplexComponentState,
+  nameSuffixes,
+} from "@dblimp/core";
+
+import schema from "./menu-item-schema.json";
+
+export interface MenuItemProps extends ComplexComponentProps {
+  exact?: boolean;
+  activeClassName?: string;
+  icon?: string | Record<string, any>;
+  iconSize?: number;
+  activeLabel?: boolean;
+  iconInline?: boolean;
+  to?: string;
+  href?: string;
+  badge?: React.ReactNode;
+}
+
+export interface MenuItemState extends ComplexComponentState {}
+
+/**
+ * Navigation item rendering an icon, label, and badge wrapped in a link or container.
+ */
+export default class MenuItem extends ComplexComponent<
+  MenuItemProps,
+  MenuItemState
+> {
+  static override jsClass = "MenuItem";
+
+  static override defaultProps: Partial<MenuItemProps> = {
+    ...ComplexComponent.defaultProps,
+    schema: schema as any,
+    exact: false,
+    activeClassName: "active",
+    icon: "circle",
+    iconSize: 40,
+    activeLabel: true,
+    definitions: {},
+    iconInline: true,
+    classes: {
+      ".": "",
+      link: "d-block p-2",
+      badge: "bg-danger border-light",
+      icon: "align-middle",
+      label: "",
+    },
+    rules: {
+      ...nameSuffixes(["Link", "Icon", "Label", "Badge"]),
+      $classesLink: ["join", ["im-link", "$data/classes/link"], " "],
+      $classesIcon: ["join", ["me-2", "$data/classes/icon"], " "],
+      $classesLabel: ["join", ["im-label", "$data/classes/label"], " "],
+      $classesBadge: [
+        "join",
+        [
+          "position-absolute translate-middle-y rounded-pill badge border d-flex justify-content-center align-items-center",
+          "$data/classes/badge",
+        ],
+        " ",
+      ],
+      $dataLabel: ["ignore", "$data/label"],
+    },
+  };
+
+  override classes = "position-relative";
+
+  override mutations(sn: string, _s?: any): any {
+    const { name } = this.props;
+    switch (sn) {
+      case name + "Badge": {
+        const badgeClasses = (this.props.classes as any)?.badge ?? "";
+        const classes = [
+          (this.props.rules as any)?.$classesBadge?.[1]?.[0],
+          badgeClasses,
+          this.props.activeLabel ? " top-0 end-0" : " top-0 start-0",
+        ]
+          .flat()
+          .join(" ");
+        const badgeSize = !this.props.activeLabel
+          ? 0.6 * (this.props.iconSize ?? 40)
+          : 22;
+        return {
+          active: !!this.props.badge,
+          content: this.props.badge,
+          classes,
+          style: {
+            zIndex: 1,
+            height: badgeSize,
+            width: badgeSize,
+            marginLeft: !this.props.activeLabel
+              ? (this.props.iconSize ?? 40) * 0.75
+              : 0,
+            marginTop: !this.props.activeLabel
+              ? this.props.iconSize ?? 40
+              : ((this.props.iconSize ?? 40) + badgeSize) * 0.41,
+          },
+        };
+      }
+      case name + "Icon":
+        return typeof this.props.icon === "string"
+          ? {
+              icon: this.props.icon,
+              inline: this.props.iconInline,
+              style: {
+                pointerEvents: "none",
+                width: this.props.iconSize,
+                height: this.props.iconSize,
+              },
+            }
+          : typeof this.props.icon === "object"
+            ? this.props.icon
+            : { active: false };
+      case name + "Label":
+        return { active: this.props.activeLabel, content: this.props.label };
+      case name + "Link":
+        return {
+          component: !this.props.to ? "Component" : "NavLink",
+          tag: !this.props.to ? "span" : this.props.href ? "a" : undefined,
+          _props: this.props.href
+            ? {
+                target: "_blank",
+                href: this.props.href,
+              }
+            : undefined,
+        };
+      default:
+        break;
+    }
+    return (this.state as any)[sn];
+  }
+}

@@ -4,9 +4,13 @@
     "outDir": "./dist/esm",
     "declarationDir": "./dist/types",
     "rootDir": "./src",
-    "declaration": true
+    "declaration": true,
+    "paths": {
+      "@dblimp/core": ["packages/core/dist/types/index"],
+      "@dblimp/core/*": ["packages/core/dist/types/*"],
+      "@dblimp/icomoon": ["packages/icomoon/dist/types/index"]
+    },
+    "baseUrl": "../.."
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }

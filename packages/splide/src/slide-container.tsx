@@ -30,7 +30,7 @@ export default class SlideContainer extends Container {
     },
   };
 
-  override content(children: React.ReactNode = this.props.children): React.ReactNode {
+  override content(children: any = this.props.children): any {
     if (!this.breakpoint) return this.waitBreakpoint;
 
     const sliderConfig: SplideConfig = {

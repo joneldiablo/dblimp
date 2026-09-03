@@ -10,6 +10,7 @@ import SlideContainer from "./slide-container";
 import FooterContainer from "./footer-container";
 import ModalButtonContainer from "./modal-button-container";
 import DropdownButtonContainer from "./dropdown-button-container";
+import DropdownContainer from "./dropdown-container";
 
 const CONTAINERS = {
   AlertContainer,
@@ -24,6 +25,7 @@ const CONTAINERS = {
   FooterContainer,
   ModalButtonContainer,
   DropdownButtonContainer,
+  DropdownContainer,
 };
 
 export const addContainers = (newContainers: Record<string, any>) => {
@@ -43,6 +45,7 @@ export {
   FooterContainer,
   ModalButtonContainer,
   DropdownButtonContainer,
+  DropdownContainer,
 };
 
 export default CONTAINERS;

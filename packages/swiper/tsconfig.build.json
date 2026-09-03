@@ -3,9 +3,15 @@
   "compilerOptions": {
     "outDir": "./dist/cjs",
     "declarationDir": "./dist/types",
-    "module": "CommonJS"
+    "module": "CommonJS",
+    "rootDir": "./src",
+    "declaration": true,
+    "moduleResolution": "node",
+    "paths": {
+      "@dblimp/core": ["packages/core/dist/types/index"],
+      "@dblimp/core/*": ["packages/core/dist/types/*"]
+    },
+    "baseUrl": "../.."
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }

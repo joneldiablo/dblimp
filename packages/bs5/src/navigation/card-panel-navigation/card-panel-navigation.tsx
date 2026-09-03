@@ -1,66 +1,73 @@
-import JsonComponent, { JrcProps } from "dbl-components/lib/js/json-render-component";
+import {
+  GoatComponent,
+  GoatComponentProps,
+  GoatComponentState,
+} from "@dblimp/core";
 
 import schema from "./card-panel-navigation.json";
 import "./style.scss";
-import { resolveRefs } from "@dblimp/core";
 
-export interface CardPanelNavigationProps extends JrcProps {
+export interface CardPanelNavigationProps extends GoatComponentProps {
   location: any;
   basePath: string;
 }
 
-export default class CardPanelNavigation extends JsonComponent<CardPanelNavigationProps> {
+export interface CardPanelNavigationState extends GoatComponentState {
+  size: any;
+}
 
-  static jsClass = "CardPanelNavigation";
-  static template = schema;
+/**
+ * Navigation panel rendering cards or route panels depending on active path and breakpoint.
+ */
+export default class CardPanelNavigation extends GoatComponent<
+  CardPanelNavigationProps,
+  CardPanelNavigationState
+> {
+  static override jsClass = "CardPanelNavigation";
+  static override template = schema as any;
   static slots = [];
-  static defaultProps = {
-    ...JsonComponent.defaultProps,
-    childrenIn: undefined,
-  }
-
-  style = {
-
-  }
+  static override defaultProps: Partial<CardPanelNavigationProps> = {
+    ...GoatComponent.defaultProps,
+    childrenIn: false,
+  };
 
   constructor(props: CardPanelNavigationProps) {
     super(props);
-    this.events.push(
-      [`resize.${props.name}-container`, this.onResize.bind(this)],
-    );
-    Object.assign(this.state, {
-      size: {}
-    });
+    this.events.push([
+      `resize.${props.name}-container`,
+      this.onResize.bind(this),
+    ]);
+    this.state = {
+      ...(this.state || {}),
+      size: {},
+    };
   }
 
-  get childrenIn() {
-    return [
-      this.props.name,
-      "children"
-    ].join('-');
+  get childrenIn(): any {
+    return [this.props.name, "children"].join("-");
   }
 
-  onResize(data: any) {
+  onResize(data: any): void {
     this.setState({ size: data });
   }
 
-  mutations(name: string, conf: any) {
-    const id = name.split('-').slice(1).join('-');
+  override mutations(name: string, conf: any): any {
+    const id = name.split("-").slice(1).join("-");
     switch (id) {
-      case 'listCards': {
+      case "listCards": {
         return {
-          active: this.props.basePath === this.props.location.pathname,
-        }
+          active: this.props.basePath === this.props.location?.pathname,
+        };
       }
-      case 'panelRoutes': {
+      case "panelRoutes": {
         return {
-          active: this.props.basePath !== this.props.location.pathname,
-        }
+          active: this.props.basePath !== this.props.location?.pathname,
+        };
       }
-      case 'listNav': {
+      case "listNav": {
         return {
-          active: !['xs', 'sm', 'md'].includes(this.state.size.breakpoint),
-        }
+          active: !["xs", "sm", "md"].includes(this.state?.size?.breakpoint),
+        };
       }
       default:
         break;

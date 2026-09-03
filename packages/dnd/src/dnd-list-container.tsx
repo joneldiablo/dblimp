@@ -83,7 +83,9 @@ export default class DndListContainer extends Component<
   }
 
   override componentDidMount(): void {
-    this.events.forEach(([evt, cb]) => eventHandler.subscribe(evt, cb));
+    this.events.forEach(([evt, cb]) =>
+      eventHandler.subscribe(evt, cb, this.props.name)
+    );
   }
 
   override componentDidUpdate(prevProps: Readonly<DndListContainerProps>): void {
@@ -93,7 +95,9 @@ export default class DndListContainer extends Component<
   }
 
   override componentWillUnmount(): void {
-    this.events.forEach(([evt]) => eventHandler.unsubscribe(evt));
+    this.events.forEach(([evt]) =>
+      eventHandler.unsubscribe(evt, this.props.name)
+    );
   }
 
   private onDragEnd(result: DropResult): void {

@@ -8,6 +8,9 @@ export { default as AutoResponsiveContainer } from "./containers/auto-responsive
 export { default as FullscreenContainer } from "./containers/fullscreen-container";
 export { default as ProportionalContainer } from "./containers/proportional-container";
 export { default as ScrollContainer } from "./containers/scroll-container";
+export { default as FetchContainer } from "./containers/fetch-container";
+export { default as FlexContainer } from "./containers/flex-container";
+export { default as GridSwitchContainer } from "./containers/grid-switch-container";
 
 export { default as Controller } from "./controllers/controller";
 export { default as TitleController } from "./controllers/title-controller";
@@ -31,6 +34,7 @@ export { default as Goat } from "./goat";
 export { default as GoatComponent } from "./goat-component";
 export { default as ComplexComponent } from "./complex-component";
 export { default as ComplexResponsiveComponent } from "./complex-responsive-component";
+export { default as Form } from "./forms/form";
 
 export * from "./containers/container";
 export * from "./containers/details-container";
@@ -42,6 +46,9 @@ export * from "./containers/auto-responsive-container";
 export * from "./containers/fullscreen-container";
 export * from "./containers/proportional-container";
 export * from "./containers/scroll-container";
+export * from "./containers/fetch-container";
+export * from "./containers/flex-container";
+export * from "./containers/grid-switch-container";
 
 export * from "./controllers/controller";
 export * from "./controllers/title-controller";
@@ -68,6 +75,7 @@ export * from "./goat";
 export * from "./goat-component";
 export * from "./complex-component";
 export * from "./complex-responsive-component";
+export * from "./forms/form";
 
 export * from 'dbl-utils';
 export { extractNodeString } from 'dbl-utils/extract-react-node-text';
