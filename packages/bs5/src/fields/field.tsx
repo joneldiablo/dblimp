@@ -52,7 +52,7 @@ export interface FieldState extends ComponentState {
 export default class Field<
   TProps extends FieldProps = FieldProps,
   TState extends FieldState = FieldState
-> extends Component<FieldProps, FieldState> {
+> extends Component<TProps, TState> {
   static jsClass = "Field";
   static defaultProps: Partial<FieldProps> = {
     ...Component.defaultProps,
@@ -207,7 +207,7 @@ export default class Field<
     return this.props.type;
   }
 
-  get inputProps() {
+  get inputProps(): Record<string, any> {
     const {
       disabled,
       readOnly,
@@ -306,7 +306,7 @@ export default class Field<
     return labelNode;
   }
 
-  get inputNode() {
+  get inputNode(): React.ReactElement {
     const inputNode = React.createElement("input", { ...this.inputProps });
     return inputNode;
   }

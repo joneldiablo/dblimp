@@ -54,8 +54,8 @@ export default class RadioField<
     );
   }
 
-  get inputProps() {
-    const props = super.inputProps;
+  get inputProps(): Record<string, any> {
+    const props = super.inputProps as Record<string, any>;
     delete props.ref;
     delete props.className;
     let className = "form-check-input";

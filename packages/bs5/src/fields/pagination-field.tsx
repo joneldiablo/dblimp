@@ -122,8 +122,9 @@ export default class PaginationField extends Field<
   }
 
   content(children = this.props.children) {
-    const { paginationClasses, texts, firstBtn, previusBtn, nextBtn, lastBtn } =
+    const { paginationClasses, firstBtn, previusBtn, nextBtn, lastBtn } =
       this.props;
+    const texts = this.props.texts!;
     const { total } = this.state as PaginationFieldState;
     const cn = ["pagination", paginationClasses];
     const isFirst = this.isFirst();

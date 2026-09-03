@@ -1,13 +1,13 @@
 import React, { createRef } from "react";
 import Dropdown from "bootstrap/js/dist/dropdown";
-import Component from "../component";
+import Component, { ComponentProps } from "../component";
 
 export interface DropdownItem {
   label: React.ReactNode;
   onClick?: () => void;
 }
 
-export interface DropdownButtonContainerProps {
+export interface DropdownButtonContainerProps extends ComponentProps {
   buttonClasses?: string;
   menu?: DropdownItem[];
 }

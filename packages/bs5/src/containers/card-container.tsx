@@ -1,6 +1,7 @@
 import React from "react";
 
 import Container from "./container";
+import { ComponentProps } from "../component";
 
 export default class CardContainer extends Container {
 
@@ -15,13 +16,13 @@ export default class CardContainer extends Container {
 
   classes = 'card';
 
-  constructor(props) {
+  constructor(props: ComponentProps) {
     super(props);
   }
 
-  content(children = this.props.children) {
+  content(children: React.ReactNode[] = this.props.children as React.ReactNode[]) {
     if (!this.breakpoint) return this.waitBreakpoint;
-    const theContent = {
+    const theContent: Record<string, any[]> = {
       header: [],
       body: [],
       footer: []
@@ -29,7 +30,8 @@ export default class CardContainer extends Container {
     const { headerClasses,
       bodyClasses,
       footerClasses } = this.props;
-    children.forEach((child, i) => {
+    children.forEach((childRaw, i) => {
+      const child = childRaw as unknown as { props?: any; type?: any; key?: any };
       if (!child) return;
       const props = (!(child.props?.style && child.props.style['--component-name'])
         ? child : child.props.children).props;

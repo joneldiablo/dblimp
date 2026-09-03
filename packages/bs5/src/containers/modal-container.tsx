@@ -1,14 +1,32 @@
 import React from "react";
-import Modal from "bootstrap/js/dist/modal";
+import Modal, { ModalOptions } from "bootstrap/js/dist/modal";
 
 import { eventHandler, splitAndFlat } from "@dblimp/core";
 
-import Component from "../component";
+import Component, { ComponentProps, ComponentState } from "../component";
 
+export interface ModalContainerProps extends ComponentProps {
+  modal?: ModalOptions;
+  modalClasses?: string;
+  headerClasses?: string;
+  bodyClasses?: string;
+  footerClasses?: string;
+  closeModalClasses?: string;
+  moveElement?: boolean;
+  headerTheme?: string | null;
+  showClose?: boolean;
+  open?: boolean;
+}
 
+export interface ModalContainerState extends ComponentState {
+  showModal: boolean;
+}
 
-export default class ModalContainer extends Component {
-  //PATCH: se iomplementó un clone del elemento para colocarlo hasta el body, esta solución corrige cuando un modal se mete dentro de un contenedor flex que no permite acomodar el modal correctamente
+export default class ModalContainer extends Component<
+  ModalContainerProps,
+  ModalContainerState
+> {
+  //PATCH: se implementó un clone del elemento para colocarlo hasta el body, esta solución corrige cuando un modal se mete dentro de un contenedor flex que no permite acomodar el modal correctamente
   static jsClass = 'ModalContainer';
   static defaultProps = {
     ...Component.defaultProps,
@@ -22,39 +40,41 @@ export default class ModalContainer extends Component {
     headerTheme: null,
   }
 
-  constructor(props) {
+  protected events: string[] = [
+    'show',
+    'shown',
+    'hide',
+    'hidden',
+    'hidePrevented'
+  ];
+  protected modal?: Modal | null;
+
+  constructor(props: ModalContainerProps) {
     super(props);
-    this.events = [
-      'show',
-      'shown',
-      'hide',
-      'hidden',
-      'hidePrevented'
-    ];
     this.state.showModal = !!props.open;
   }
 
   componentDidMount() {
     const { name } = this.props;
-    eventHandler.subscribe('update.' + name, this.onUpdateModal);
+    eventHandler.subscribe('update.' + name, this.onUpdateModal, name);
   }
 
   componentWillUnmount() {
     const { name } = this.props;
     this.destroy();
-    eventHandler.unsubscribe('update.' + name);
+    eventHandler.unsubscribe('update.' + name, name);
   }
 
-  onEvent = (e) => {
+  onEvent = (e: Event) => {
     const { name } = this.props;
     eventHandler.dispatch(name, { [name]: e.type.split('.')[0] });
   }
 
-  onClickClose = (e) => {
-    this.modal.hide();
+  onClickClose = (e: React.MouseEvent) => {
+    this.modal?.hide();
   }
 
-  onUpdateModal = ({ open: showModal }) => {
+  onUpdateModal = ({ open: showModal }: { open: boolean }) => {
     if (!showModal) {
       return this.modal?.hide();
     }
@@ -69,7 +89,7 @@ export default class ModalContainer extends Component {
     this.setState({ showModal: false });
   }
 
-  onModalRef = (refOriginal) => {
+  onModalRef = (refOriginal: any) => {
     if (refOriginal) {
       const ref = this.props.moveElement ? refOriginal.cloneNode(true) : refOriginal;
       if (this.props.moveElement) refOriginal.style.display = 'none';
@@ -83,23 +103,28 @@ export default class ModalContainer extends Component {
     }
   }
 
-  content(children = this.props.children) {
+  content(children: React.ReactNode = this.props.children) {
     const { modalClasses, name, showClose, headerClasses,
       bodyClasses, footerClasses, closeModalClasses, headerTheme } = this.props;
     const { showModal } = this.state;
     const cnModal = ['modal-dialog', modalClasses];
-    const cg = (Array.isArray(children) ? children : [children]).reduce((reducer, child) => {
+    const cg = (Array.isArray(children) ? children : [children]).reduce((reducer, childRaw) => {
+      const child = childRaw as React.ReactNode & {
+        props?: { container?: string; children?: any };
+      };
       if (!child) return reducer;
       // Se separa el contenido según tipo de container header, body, footer o ninguno
       if (['string', 'number'].includes(typeof child)) {
         reducer.body.push(child);
         return reducer;
       }
-      const childProps = child.props.container ? child.props : child.props.children?.props;
+      const childProps = child.props?.container
+        ? child.props
+        : child.props?.children?.props;
       const container = (childProps && reducer[childProps.container]) || reducer.content;
       container.push(child);
       return reducer;
-    }, { header: [], body: [], footer: [], content: [] });
+    }, { header: [] as React.ReactNode[], body: [] as React.ReactNode[], footer: [] as React.ReactNode[], content: [] as React.ReactNode[] });
     return showModal && React.createElement('div',
       {
         ref: this.onModalRef,
@@ -153,5 +178,4 @@ export default class ModalContainer extends Component {
       )
     );
   }
-
 }

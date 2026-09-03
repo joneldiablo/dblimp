@@ -1,7 +1,8 @@
 import React from "react";
 import Container from "./container";
+import { ComponentProps } from "../component";
 
-export interface GridContainerProps {
+export interface GridContainerProps extends ComponentProps {
   rowClasses?: string;
   colClasses?: string;
 }

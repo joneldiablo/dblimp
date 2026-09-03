@@ -1,17 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icons } from "@dblimp/icomoon";
-import Navigation, { NavigationProps, NavigationState } from "./navigation";
+import Navigation, { NavigationItem, NavigationProps, NavigationState } from "./navigation";
 
-export interface CardListNavigationItem {
+export interface CardListNavigationItem extends NavigationItem {
   label?: React.ReactNode;
   description?: React.ReactNode;
   path?: string;
   icon?: string;
   image?: string;
+  title?: React.ReactNode;
+  iconClasses?: string | string[];
 }
 
-export interface CardListNavigationProps extends NavigationProps {
+export interface CardListNavigationProps extends NavigationProps<CardListNavigationItem> {
   menu?: CardListNavigationItem[] | Record<string, CardListNavigationItem>;
   viewType?: "list" | "cards";
 }
@@ -24,6 +26,7 @@ export interface CardListNavigationState extends NavigationState {
  * Navigation component that renders menu items as either a Bootstrap list or cards grid.
  */
 export default class CardListNavigation extends Navigation<
+  CardListNavigationItem,
   CardListNavigationProps,
   CardListNavigationState
 > {
@@ -43,7 +46,7 @@ export default class CardListNavigation extends Navigation<
     };
   }
 
-  getAsCards(): React.ReactNode {
+  getAsCards(): React.JSX.Element {
     const menu = this.props.menu || [];
     const entries = Array.isArray(menu)
       ? menu.map((item, i) => [String(i), item] as const)
@@ -85,7 +88,7 @@ export default class CardListNavigation extends Navigation<
     );
   }
 
-  getAsList(): React.ReactNode {
+  getAsList(): React.JSX.Element {
     const menu = this.props.menu || [];
     const entries = Array.isArray(menu)
       ? menu.map((item, i) => [String(i), item] as const)
@@ -118,7 +121,7 @@ export default class CardListNavigation extends Navigation<
     );
   }
 
-  override render(): React.ReactNode {
+  override render(): React.JSX.Element {
     return this.state.type === "list" ? this.getAsList() : this.getAsCards();
   }
 }

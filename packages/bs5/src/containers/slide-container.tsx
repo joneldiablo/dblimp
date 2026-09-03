@@ -1,8 +1,9 @@
 import React from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import Container from "./container";
+import { ComponentProps } from "../component";
 
-export interface SlideContainerProps {
+export interface SlideContainerProps extends ComponentProps {
   options?: Record<string, any>;
   slideClasses?: string;
 }

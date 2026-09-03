@@ -1,7 +1,8 @@
 import React from "react";
 import Container from "./container";
+import { ComponentProps } from "../component";
 
-export interface ScrollContainerProps {
+export interface ScrollContainerProps extends ComponentProps {
   classes?: string;
   style?: React.CSSProperties;
 }

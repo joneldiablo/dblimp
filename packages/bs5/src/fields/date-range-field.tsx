@@ -1,7 +1,7 @@
 import React, { createRef } from "react";
 import moment from "moment";
 
-import Field from "./field";
+import Field, { FieldProps } from "./field";
 
 export default class DateRangeField extends Field {
 
@@ -11,16 +11,17 @@ export default class DateRangeField extends Field {
     default: ['', '']
   };
 
-  constructor(props) {
+  inputEnd = createRef<HTMLInputElement>();
+
+  constructor(props: FieldProps) {
     super(props);
-    this.inputEnd = createRef();
   }
 
-  isInvalid(value) {
+  isInvalid(value: any) {
     let error = super.isInvalid(value);
     this.inputEnd.current?.setCustomValidity('');
     const isAfter = moment(value[0]).isAfter(value[1]);
-    if (isAfter) this.inputEnd.current?.setCustomValidity(this.props.errorMessage);
+    if (isAfter) this.inputEnd.current?.setCustomValidity(this.props.errorMessage as string);
     return (error || isAfter);
   }
 
@@ -28,9 +29,9 @@ export default class DateRangeField extends Field {
     return 'date';
   }
 
-  onChange({ target }) {
+  onChange({ target }: React.ChangeEvent<HTMLInputElement>) {
     const { name } = this.props;
-    const { value } = this.state;
+    const { value } = this.state as { value: any[] };
     const { value: newValue } = target;
     const i = target.name === name ? 0 : 1;
     value[i] = newValue;
@@ -43,7 +44,7 @@ export default class DateRangeField extends Field {
   get inputNode() {
     const { inline } = this.props;
     const { error } = this.state;
-    const inputProps = this.inputProps;
+    const inputProps = this.inputProps as Record<string, any>;
     const cnMiddle = ['input-group-text bg-transparent p-0', this.props.controlClasses];
     if (error) cnMiddle.push('border-danger');
     const style = {

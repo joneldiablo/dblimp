@@ -112,7 +112,7 @@ export default class DropFileField extends Field<
   }
 
   get inputProps() {
-    const props = super.inputProps;
+    const props = super.inputProps as Record<string, any>;
     const { accept, multiple } = this.props;
     const { valueInput, value } = this.state as DropFileFieldState;
     props.value = !!value?.length ? valueInput : value;

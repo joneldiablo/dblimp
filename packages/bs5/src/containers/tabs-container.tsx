@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "./container";
+import { ComponentProps, ComponentState } from "../component";
 
 export interface TabItem {
   label: React.ReactNode;
@@ -7,13 +8,20 @@ export interface TabItem {
   content: React.ReactNode;
 }
 
-export interface TabsContainerProps {
+export interface TabsContainerProps extends ComponentProps {
   tabs?: TabItem[];
   navClasses?: string;
   contentClasses?: string;
 }
 
-export default class TabsContainer extends Container<TabsContainerProps> {
+export interface TabsContainerState extends ComponentState {
+  active?: string;
+}
+
+export default class TabsContainer extends Container<
+  TabsContainerProps,
+  TabsContainerState
+> {
   static jsClass = 'TabsContainer';
   static defaultProps: Partial<TabsContainerProps> = {
     ...Container.defaultProps,
@@ -22,7 +30,11 @@ export default class TabsContainer extends Container<TabsContainerProps> {
     contentClasses: 'tab-content'
   };
 
-  state = { active: this.props.tabs?.[0]?.eventKey };
+  state: TabsContainerState = {
+    localClasses: "",
+    localStyles: {},
+    active: this.props.tabs?.[0]?.eventKey,
+  };
 
   onSelect = (key: string) => {
     this.setState({ active: key });
@@ -30,7 +42,7 @@ export default class TabsContainer extends Container<TabsContainerProps> {
 
   content(children: React.ReactNode = this.props.children): React.ReactNode {
     const { tabs, navClasses, contentClasses } = this.props;
-    const { active } = this.state as any;
+    const { active } = this.state;
     if (tabs && tabs.length) {
       return (
         <>

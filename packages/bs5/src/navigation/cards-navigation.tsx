@@ -2,17 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { randomS4 } from "@dblimp/core";
 import { Icons } from "@dblimp/icomoon";
-import Navigation, { NavigationProps, NavigationState } from "./navigation";
+import Navigation, { NavigationItem, NavigationProps, NavigationState } from "./navigation";
 
-export interface CardsNavigationItem {
+export interface CardsNavigationItem extends NavigationItem {
   label?: React.ReactNode;
   description?: React.ReactNode;
   path?: string;
   icon?: string;
   image?: string;
+  title?: React.ReactNode;
+  iconClasses?: string | string[];
 }
 
-export interface CardsNavigationProps extends NavigationProps {
+export interface CardsNavigationProps extends NavigationProps<CardsNavigationItem> {
   closestId?: number | string;
   menu?: CardsNavigationItem[] | Record<string, CardsNavigationItem>;
 }
@@ -25,6 +27,7 @@ export interface CardsNavigationState extends NavigationState {
  * Grid of navigation cards with responsive column breakpoints.
  */
 export default class CardsNavigation extends Navigation<
+  CardsNavigationItem,
   CardsNavigationProps,
   CardsNavigationState
 > {
@@ -71,7 +74,7 @@ export default class CardsNavigation extends Navigation<
     }
   }
 
-  override render(): React.ReactNode {
+  override render(): React.JSX.Element {
     const menu = this.props.menu || [];
     const entries = Array.isArray(menu)
       ? menu.map((item, i) => [String(i), item] as const)

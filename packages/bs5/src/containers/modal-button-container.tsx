@@ -1,8 +1,8 @@
 import React from "react";
 import { eventHandler } from "@dblimp/core";
-import Component from "../component";
+import Component, { ComponentProps } from "../component";
 
-export interface ModalButtonContainerProps {
+export interface ModalButtonContainerProps extends ComponentProps {
   target: string;
   buttonClasses?: string;
 }

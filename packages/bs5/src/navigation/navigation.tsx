@@ -21,7 +21,7 @@ export interface NavigationItem {
   iconProps?: Record<string, any>;
   itemClasses?: string | string[];
   itemProps?: Record<string, any>;
-  label: string;
+  label?: React.ReactNode;
   menu?: NavigationItem[] | Record<string, NavigationItem>;
   name: string;
   parent?: NavigationItem | string;
@@ -31,12 +31,13 @@ export interface NavigationItem {
   open?: boolean;
   activeCaretClasses?: string | string[];
   caretClasses?: string | string[];
-  iconClasses: string | string[];
-  title: string | React.ReactNode;
+  iconClasses?: string | string[];
+  title?: string | React.ReactNode;
 }
 
-export interface NavigationProps extends ComponentProps {
-  menu?: NavigationItem[];
+export interface NavigationProps<TItem extends NavigationItem = NavigationItem>
+  extends ComponentProps {
+  menu?: TItem[] | Record<string, TItem>;
   caretIcons?: [string, string];
   navLink?: boolean;
   activeClasses?: string;
@@ -57,7 +58,11 @@ export interface NavigationState extends ComponentState {
   localClasses: string;
 }
 
-export default class Navigation extends Component<NavigationProps, NavigationState> {
+export default class Navigation<
+  TItem extends NavigationItem = NavigationItem,
+  TProps extends NavigationProps<TItem> = NavigationProps<TItem>,
+  TState extends NavigationState = NavigationState
+> extends Component<TProps, TState> {
   static jsClass = "Navigation";
 
   static defaultProps: Partial<NavigationProps> = {
@@ -78,14 +83,14 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
   protected tag: any = "nav";
   protected events: [string, (...args: any[]) => void][] = [];
   protected activeElements: Record<string, boolean> = {};
-  protected flatItems: Record<string, NavigationItem> = {};
+  protected flatItems: Record<string, TItem> = {};
   protected collapses = createRef<Record<string, any>>();
   protected itemsRefs = createRef<Record<string, any>>();
   protected goat: Goat;
-  protected activeItem?: NavigationItem;
+  protected activeItem?: TItem;
   protected pathname?: string;
 
-  constructor(props: NavigationProps) {
+  constructor(props: TProps) {
     super(props);
 
     const open = typeof props.open !== "boolean" || props.open;
@@ -115,7 +120,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
     this.events.forEach(([evt, handler]) => eventHandler.subscribe(evt, handler, this.name));
   }
 
-  componentDidUpdate(prevProps: NavigationProps): void {
+  componentDidUpdate(prevProps: NavigationProps<TItem>): void {
     // Verificar si `open` cambió y actualizar
     if (typeof this.props.open === "boolean" && prevProps.open !== this.props.open) {
       this.toggleText(this.props.open);
@@ -153,10 +158,18 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
    * @param parent (Opcional) Ítem padre del menú
    * @returns El primer ítem activo encontrado o `undefined`
    */
-  protected findFirstActive(menu: NavigationItem[] | undefined, parent?: NavigationItem): NavigationItem | undefined {
-    let foundItem: NavigationItem | undefined;
+  protected findFirstActive(
+    menu: TItem[] | Record<string, TItem> | undefined,
+    parent?: TItem
+  ): TItem | undefined {
+    const items = Array.isArray(menu)
+      ? menu
+      : menu
+        ? Object.entries(menu).map(([name, item]) => ({ name, ...(item as any) }))
+        : undefined;
+    let foundItem: TItem | undefined;
 
-    menu?.some(item => {
+    items?.some(item => {
       item.parent = parent;
       this.flatItems[item.name] = item;
       item.hasAnActive = false;
@@ -221,7 +234,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
    * @param ref Referencia del DOM.
    * @param item Ítem de navegación asociado.
    */
-  protected collapseRef(ref: HTMLElement | null, item: NavigationItem): void {
+  protected collapseRef(ref: HTMLElement | null, item: TItem): void {
     if (!ref) return;
     if (!this.collapses.current) this.collapses.current = {};
     if (this.collapses.current[item.name]?.ref === ref) return;
@@ -238,7 +251,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
    * @param e Evento de clic.
    * @param item Ítem de navegación asociado.
    */
-  protected onToggleSubmenu(e: React.MouseEvent, item: NavigationItem): void {
+  protected onToggleSubmenu(e: React.MouseEvent, item: TItem): void {
     if (!item.menu?.length || !this.state.open) return;
     e.stopPropagation();
     e.preventDefault();
@@ -272,7 +285,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
    * @param e Evento de mouse.
    * @param item Ítem de navegación asociado.
    */
-  protected onToggleFloating(e: React.MouseEvent, item: NavigationItem): void {
+  protected onToggleFloating(e: React.MouseEvent, item: TItem): void {
     eventHandler.dispatch(`update.${item.name}Floating`, { open: true });
 
     // Forzar actualización después de un breve tiempo para cargar referencias
@@ -310,7 +323,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
    * @param menuItem Ítem del menú a evaluar.
    * @returns El nombre del ítem raíz activo.
    */
-  protected hasAnActive(menuItem: NavigationItem): string {
+  protected hasAnActive(menuItem: TItem): string {
     if (!menuItem.parent) return menuItem.name;
     const parent = this.flatItems[menuItem.parent as string];
     if (parent) {
@@ -325,7 +338,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
    * @param location Objeto de ubicación con la nueva ruta.
    */
   protected onChangeLocation(location: { pathname: string }): void {
-    let activeItem: NavigationItem | undefined;
+    let activeItem: TItem | undefined;
 
     Object.values(this.flatItems).forEach(item => {
       const path = item.path || item.to;
@@ -338,7 +351,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
       this.hasAnActive(activeItem);
 
       if (!this.state.open && activeItem.parent) {
-        eventHandler.dispatch(`update.${(activeItem.parent as NavigationItem).name}Floating`, { open: false });
+        eventHandler.dispatch(`update.${(activeItem.parent as TItem).name}Floating`, { open: false });
       }
     }
 
@@ -352,7 +365,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
    * @param parent (Opcional) Ítem padre del menú.
    * @returns Un nodo React representando el enlace del menú.
    */
-  protected link(itemRaw: NavigationItem, i: number, parent?: NavigationItem): React.ReactNode {
+  protected link(itemRaw: TItem, i: number, parent?: TItem): React.ReactNode {
     if (!itemRaw) return null;
 
     const {
@@ -546,7 +559,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
               className="collapse"
             >
               {this.state.carets[item.name] === (this.props.caretIcons?.[0] ?? "angle-up") &&
-                (item.menu as NavigationItem[]).map((m, i) => this.link(m, i, item)).filter(Boolean)}
+                (item.menu as TItem[]).map((m, i) => this.link(m, i, item)).filter(Boolean)}
             </div>
           ) : (
             this.itemsRefs.current?.[item.name] && (
@@ -558,7 +571,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
                 allowedPlacements={["right", "bottom", "top"]}
                 classes={splitAndFlat([item.floatingClasses || floatingClasses], " ").join(" ")}
               >
-                {(item.menu as NavigationItem[]).map((m, i) => this.link(m, i, item)).filter(Boolean)}
+                {(item.menu as TItem[]).map((m, i) => this.link(m, i, item)).filter(Boolean)}
               </FloatingContainer>
             )
           ))}
@@ -574,7 +587,7 @@ export default class Navigation extends Component<NavigationProps, NavigationSta
   protected content(children: React.ReactNode = this.props.children): React.ReactNode {
     return (
       <>
-        {(this.props.menu as NavigationItem[] | undefined)?.map((m, i) => this.link(m, i)).filter(Boolean)}
+        {(this.props.menu as TItem[] | undefined)?.map((m, i) => this.link(m, i)).filter(Boolean)}
         {children}
       </>
     );

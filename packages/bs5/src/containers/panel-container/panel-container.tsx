@@ -1,13 +1,16 @@
 import React from "react";
 
 import { eventHandler } from "@dblimp/core";
-import Component, { nameSuffixes } from "@dblimp/core/complex-component";
+import Component, {
+  nameSuffixes,
+  ComplexComponentProps,
+  ComplexComponentState,
+} from "@dblimp/core/complex-component";
 
-import type { ComponentProps } from "../../component";
 import schema from "./panel-schema.json";
 
-export interface PanelContainerProps extends ComponentProps {
-  breakpoint?: string;
+export interface PanelContainerProps extends ComplexComponentProps {
+  breakpoint?: number;
   contentTop?: Record<string, any>;
   icon?: string;
   iconSize?: string | number;
@@ -17,7 +20,19 @@ export interface PanelContainerProps extends ComponentProps {
   width?: string | number;
 }
 
-export default class PanelContainer extends Component<PanelContainerProps> {
+export interface PanelContainerState extends ComplexComponentState {
+  classSet: Set<string>;
+  expanded: boolean;
+  fixed: boolean;
+  mobile: boolean;
+  open: boolean;
+  [key: string]: any;
+}
+
+export default class PanelContainer extends Component<
+  PanelContainerProps,
+  PanelContainerState
+> {
   static jsClass = "PanelContainer";
   static defaultProps: Partial<PanelContainerProps> = {
     ...Component.defaultProps,
@@ -51,7 +66,7 @@ export default class PanelContainer extends Component<PanelContainerProps> {
     },
   };
 
-  constructor(props) {
+  constructor(props: PanelContainerProps) {
     super(props);
     this.events = [
       ["update." + props.name, this.onUpdate],
@@ -69,53 +84,61 @@ export default class PanelContainer extends Component<PanelContainerProps> {
       classSet: new Set(["close"]),
       expanded: false,
       fixed: false,
+      mobile: false,
       open: true,
       [props.name + "LogoLink"]: { to: props.link || "/" },
     });
     if (props.type === "reveal") this.state.classSet.add("inset");
   }
 
+  protected touchstartX = 0;
+  protected touchendX = 0;
+  protected timeoutResize?: ReturnType<typeof setTimeout>;
+
   componentDidMount() {
-    this.events.forEach((e) => eventHandler.subscribe(...e));
+    this.events.forEach((e) =>
+      eventHandler.subscribe(e[0], e[1], this.name)
+    );
     window.addEventListener("resize", this.onWindowResize);
     clearTimeout(this.timeoutResize);
     this.timeoutResize = setTimeout(
-      () => this.onWindowResize({ target: window }),
+      () => this.onWindowResize({ target: window } as unknown as Event),
       150
     );
   }
 
   componentWillUnmount() {
-    this.events.forEach(([eName]) => eventHandler.unsubscribe(eName));
+    this.events.forEach(([eName]) => eventHandler.unsubscribe(eName, this.name));
     window.removeEventListener("resize", this.onWindowResize);
     clearTimeout(this.timeoutResize);
   }
 
-  onWindowResize = (e) => {
-    const mobile = e.target.innerWidth < this.props.breakpoint;
+  onWindowResize = (e: Event) => {
+    const width = (e.target as Window | null)?.innerWidth ?? 0;
+    const mobile = width < (this.props.breakpoint ?? Infinity);
     if (mobile) {
       this.onMouseEnter();
       this.state.classSet.add("mobile");
       this.state.classSet.delete("inset");
     } else {
-      this.onMouseLeave({ force: true });
+      this.onMouseLeave({ force: true } as any);
       this.state.classSet.delete("mobile");
       if (this.props.type === "reveal") this.state.classSet.add("inset");
     }
-    this.onUpdate({ mobile, open: !mobile }, true);
+    this.onUpdate({ mobile, open: !mobile } as any, true);
   };
 
   onChangeLocation = () => {
     if (this.state.mobile && this.state.open) {
-      this.onUpdate({ open: false }, true);
+      this.onUpdate({ open: false } as any, true);
     }
   };
 
-  onToggleFixed = (e) => {
-    this.onUpdate({ fixed: !this.state.fixed }, true);
+  onToggleFixed = (e: any) => {
+    this.onUpdate({ fixed: !this.state.fixed } as any, true);
   };
 
-  onMouseEnter = (e) => {
+  onMouseEnter = (e?: { force?: boolean }) => {
     if (!e?.force && (this.state.mobile || this.state.fixed)) return;
     this.state.classSet.add("expanded");
     this.state.classSet.delete("close");
@@ -124,7 +147,7 @@ export default class PanelContainer extends Component<PanelContainerProps> {
     this.forceUpdate();
   };
 
-  onMouseLeave = (e) => {
+  onMouseLeave = (e?: { force?: boolean }) => {
     if (!e?.force && (this.state.mobile || this.state.fixed)) return;
     this.state.classSet.delete("expanded");
     this.state.classSet.add("close");
@@ -132,25 +155,25 @@ export default class PanelContainer extends Component<PanelContainerProps> {
     this.forceUpdate();
   };
 
-  onTouchStart = (e) => {
+  onTouchStart = (e: React.TouchEvent) => {
     this.touchstartX = e.changedTouches[0].screenX;
   };
 
-  onTouchEnd = (e) => {
+  onTouchEnd = (e: React.TouchEvent) => {
     this.touchendX = e.changedTouches[0].screenX;
     const diff = Math.abs(this.touchendX - this.touchstartX);
     if (diff < 18) return;
     const action = this.state.mobile ? "open" : "fixed";
     if (this.touchendX < this.touchstartX) {
-      this.onUpdate({ [action]: false }, true);
+      this.onUpdate({ [action]: false } as any, true);
     }
     if (this.touchendX > this.touchstartX) {
-      this.onUpdate({ [action]: true }, true);
+      this.onUpdate({ [action]: true } as any, true);
     }
   };
 
-  onUpdate = (update, dispatch) => {
-    const newState = {};
+  onUpdate = (update: any, dispatch?: boolean) => {
+    const newState: Record<string, any> = {};
     if (typeof update.mobile !== "undefined") {
       newState.mobile = update.mobile;
     }
@@ -162,13 +185,13 @@ export default class PanelContainer extends Component<PanelContainerProps> {
       else this.onMouseLeave({ force: true });
       newState.fixed = update.fixed;
     }
-    this.setState(newState);
+    this.setState(newState as any);
     if (dispatch) {
       eventHandler.dispatch(this.props.name, { [this.props.name]: update });
     }
   };
 
-  mutations(sn, s) {
+  mutations(sn: string, s: Record<string, any>) {
     const { name } = this.props;
     switch (sn) {
       case name + "LogoImg":
@@ -184,7 +207,7 @@ export default class PanelContainer extends Component<PanelContainerProps> {
       case name + "ContentTop":
         const active = !!this.props.contentTop;
         const content = active
-          ? this.jsonRender.buildContent(this.props.contentTop)
+          ? this.goat.buildContent(this.props.contentTop)
           : null;
         return { active, content };
       case name + "IconTF":
@@ -202,7 +225,7 @@ export default class PanelContainer extends Component<PanelContainerProps> {
     if (sn.endsWith("Submenu")) {
       return { active: this.state.expanded };
     } else if (sn.endsWith("SubItem")) {
-      const classes = s.classes;
+      const classes = s.classes as Record<string, any>;
       classes.link = "d-block ps-4 p-2";
       return {
         iconSize: this.props.iconSize,
@@ -233,7 +256,7 @@ export default class PanelContainer extends Component<PanelContainerProps> {
           this.state.mobile &&
             React.createElement("div", {
               className: "panel-touchClose",
-              onClick: () => this.onUpdate({ open: false }, true),
+              onClick: () => this.onUpdate({ open: false } as any, true),
             }),
           super.render()
         )
