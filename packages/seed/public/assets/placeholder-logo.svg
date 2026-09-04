@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="300" fill="#0ea5e9"/>
+  <circle cx="150" cy="150" r="80" fill="none" stroke="#bae6fd" stroke-width="8"/>
+  <circle cx="150" cy="150" r="20" fill="#e0f2fe"/>
+  <text x="150" y="60" font-family="sans-serif" font-size="18" fill="#e0f2fe" text-anchor="middle">inline-svg</text>
+</svg>

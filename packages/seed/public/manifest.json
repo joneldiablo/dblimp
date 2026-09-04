@@ -1,0 +1,8 @@
+{
+  "short_name": "dbl-seed",
+  "name": "dbl-seed frontend starter",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

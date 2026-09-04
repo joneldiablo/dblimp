@@ -38,7 +38,10 @@ export interface RequestApp extends RequestInit {
 export interface AppControllerProps {
   icons?: { icons: any[]; } | false;
   controllers?: Record<string, typeof Controller<any, any>>;
-  components?: Record<string, Record<string, React.FC<any> | typeof React.Component<any, any>>>;
+  components?: Record<
+    string,
+    React.FC<any> | typeof React.Component<any, any> | {} | false
+  >;
   definitions?: Array<any> | Record<string, any>;
   rules?: Array<any> | Record<string, any>;
   routes?: Array<RouteSchema>;

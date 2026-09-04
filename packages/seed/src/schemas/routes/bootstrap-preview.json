@@ -1,0 +1,392 @@
+{
+  "view": {
+    "name": "bootstrap-preview",
+    "path": "bootstrap-preview",
+    "classes": "bg-body py-5",
+    "content": {
+      "layout": {
+        "name": "layout",
+        "tag": "section",
+        "classes": "bootstrap-playground",
+        "content": [
+          {
+            "name": "intro",
+            "tag": "section",
+            "classes": "container bg-body p-4 p-lg-5 rounded shadow-sm",
+            "content": {
+              "title": {
+                "name": "title",
+                "tag": "h1",
+                "classes": "display-4 fw-semibold mb-3",
+                "content": "Bootstrap Playground"
+              },
+              "lead": {
+                "name": "lead",
+                "tag": "p",
+                "classes": "lead text-muted",
+                "content": "Una pantalla de referencia para visualizar componentes y estilos de Bootstrap 5 dentro del proyecto. Usa esta vista para validar variaciones de color, espaciados y tipografías."
+              },
+              "links": "<div class=\"d-flex flex-wrap gap-2 pt-3\"><a class=\"btn btn-outline-primary btn-sm\" href=\"#typography\">Tipografía</a><a class=\"btn btn-outline-primary btn-sm\" href=\"#buttons\">Botones</a><a class=\"btn btn-outline-primary btn-sm\" href=\"#alerts\">Alertas</a><a class=\"btn btn-outline-primary btn-sm\" href=\"#cards\">Tarjetas</a><a class=\"btn btn-outline-primary btn-sm\" href=\"#tables\">Tablas</a><a class=\"btn btn-outline-primary btn-sm\" href=\"#forms\">Formularios</a></div>"
+            }
+          },
+          {
+            "name": "typography",
+            "tag": "section",
+            "classes": "container bg-body p-4 p-lg-5 rounded shadow-sm mt-4",
+            "_props": { "id": "typography" },
+            "content": {
+              "heading": {
+                "name": "heading",
+                "tag": "h2",
+                "classes": "h3 mb-3",
+                "content": "Tipografía"
+              },
+              "description": {
+                "name": "description",
+                "tag": "p",
+                "classes": "text-muted mb-4",
+                "content": "Ejemplos de escalas tipográficas, párrafos, cotizaciones y listas."
+              },
+              "samples": {
+                "name": "samples",
+                "tag": "div",
+                "classes": "row gy-4",
+                "content": {
+                  "headings": {
+                    "name": "headings",
+                    "tag": "div",
+                    "classes": "col-lg-6",
+                    "content": {
+                      "display1": { "name": "display1", "tag": "h1", "classes": "display-1", "content": "Display 1" },
+                      "display2": { "name": "display2", "tag": "h2", "classes": "display-2", "content": "Display 2" },
+                      "display3": { "name": "display3", "tag": "h3", "classes": "display-3", "content": "Display 3" },
+                      "display4": { "name": "display4", "tag": "h4", "classes": "display-4", "content": "Display 4" },
+                      "display5": { "name": "display5", "tag": "h4", "classes": "display-5", "content": "Display 5" },
+                      "display6": { "name": "display6", "tag": "h4", "classes": "display-6", "content": "Display 6" },
+                      "h1": { "name": "h1", "tag": "h1", "classes": "mt-4", "content": "Heading h1" },
+                      "h2": { "name": "h2", "tag": "h2", "content": "Heading h2" },
+                      "h3": { "name": "h3", "tag": "h3", "content": "Heading h3" },
+                      "h4": { "name": "h4", "tag": "h4", "content": "Heading h4" },
+                      "h5": { "name": "h5", "tag": "h5", "content": "Heading h5" },
+                      "h6": { "name": "h6", "tag": "h6", "content": "Heading h6" }
+                    }
+                  },
+                  "paragraphs": {
+                    "name": "paragraphs",
+                    "tag": "div",
+                    "classes": "col-lg-6",
+                    "content": {
+                      "lead": { "name": "lead", "tag": "p", "classes": "lead", "content": "Texto principal con la clase .lead para resaltar un párrafo introductorio." },
+                      "body": { "name": "body", "tag": "p", "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet." },
+                      "blockquote": {
+                        "name": "blockquote",
+                        "tag": "blockquote",
+                        "classes": "blockquote border-start border-4 ps-3",
+                        "content": {
+                          "text": { "name": "text", "tag": "p", "content": "El diseño es el pensamiento hecho visual." },
+                          "footer": { "name": "footer", "tag": "footer", "classes": "blockquote-footer", "content": "Saul Bass" }
+                        }
+                      },
+                      "codeSample": {
+                        "name": "codeSample",
+                        "tag": "pre",
+                        "classes": "border rounded p-3 mt-3 text-info bg-light",
+                        "content": "<code>&lt;button class=\"btn btn-primary\"&gt;Ejemplo&lt;/button&gt;\n&lt;div class=\"alert alert-success\" role=\"alert\"&gt;Mensaje&lt;/div&gt;</code>"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "buttons",
+            "tag": "section",
+            "classes": "container bg-body p-4 p-lg-5 rounded shadow-sm mt-4",
+            "_props": { "id": "buttons" },
+            "content": {
+              "heading": {
+                "name": "heading",
+                "tag": "h2",
+                "classes": "h3 mb-3",
+                "content": "Botones y Colores"
+              },
+              "description": {
+                "name": "description",
+                "tag": "p",
+                "classes": "text-muted mb-4",
+                "content": "Variaciones de botones sólidos y outline, junto con tarjetas de color para revisar contrastes."
+              },
+              "palette": {
+                "name": "palette",
+                "tag": "div",
+                "classes": "row row-cols-2 row-cols-md-4 g-3 mb-4",
+                "content": {
+                  "primary": { "name": "primary", "tag": "div", "classes": "col", "content": "<div class=\"rounded text-center py-3 text-bg-primary\">Primary</div>" },
+                  "secondary": { "name": "secondary", "tag": "div", "classes": "col", "content": "<div class=\"rounded text-center py-3 text-bg-secondary\">Secondary</div>" },
+                  "success": { "name": "success", "tag": "div", "classes": "col", "content": "<div class=\"rounded text-center py-3 text-bg-success\">Success</div>" },
+                  "danger": { "name": "danger", "tag": "div", "classes": "col", "content": "<div class=\"rounded text-center py-3 text-bg-danger\">Danger</div>" },
+                  "warning": { "name": "warning", "tag": "div", "classes": "col", "content": "<div class=\"rounded text-center py-3 text-bg-warning\">Warning</div>" },
+                  "info": { "name": "info", "tag": "div", "classes": "col", "content": "<div class=\"rounded text-center py-3 text-bg-info\">Info</div>" },
+                  "light": { "name": "light", "tag": "div", "classes": "col", "content": "<div class=\"rounded text-center py-3 text-bg-light border\">Light</div>" },
+                  "dark": { "name": "dark", "tag": "div", "classes": "col", "content": "<div class=\"rounded text-center py-3 text-bg-dark\">Dark</div>" }
+                }
+              },
+              "solidButtons": {
+                "name": "solidButtons",
+                "tag": "div",
+                "classes": "d-flex flex-wrap gap-2 mb-3",
+                "content": [
+                  { "name": "primary", "tag": "button", "classes": "btn btn-primary", "_props": { "type": "button" }, "content": "Primary" },
+                  { "name": "secondary", "tag": "button", "classes": "btn btn-secondary", "_props": { "type": "button" }, "content": "Secondary" },
+                  { "name": "success", "tag": "button", "classes": "btn btn-success", "_props": { "type": "button" }, "content": "Success" },
+                  { "name": "danger", "tag": "button", "classes": "btn btn-danger", "_props": { "type": "button" }, "content": "Danger" },
+                  { "name": "warning", "tag": "button", "classes": "btn btn-warning", "_props": { "type": "button" }, "content": "Warning" },
+                  { "name": "info", "tag": "button", "classes": "btn btn-info", "_props": { "type": "button" }, "content": "Info" },
+                  { "name": "light", "tag": "button", "classes": "btn btn-light", "_props": { "type": "button" }, "content": "Light" },
+                  { "name": "dark", "tag": "button", "classes": "btn btn-dark", "_props": { "type": "button" }, "content": "Dark" },
+                  { "name": "link", "tag": "button", "classes": "btn btn-link", "_props": { "type": "button" }, "content": "Link" }
+                ]
+              },
+              "outlineButtons": {
+                "name": "outlineButtons",
+                "tag": "div",
+                "classes": "d-flex flex-wrap gap-2 mb-4",
+                "content": [
+                  { "name": "primary", "tag": "button", "classes": "btn btn-outline-primary", "_props": { "type": "button" }, "content": "Primary" },
+                  { "name": "secondary", "tag": "button", "classes": "btn btn-outline-secondary", "_props": { "type": "button" }, "content": "Secondary" },
+                  { "name": "success", "tag": "button", "classes": "btn btn-outline-success", "_props": { "type": "button" }, "content": "Success" },
+                  { "name": "danger", "tag": "button", "classes": "btn btn-outline-danger", "_props": { "type": "button" }, "content": "Danger" },
+                  { "name": "warning", "tag": "button", "classes": "btn btn-outline-warning", "_props": { "type": "button" }, "content": "Warning" },
+                  { "name": "info", "tag": "button", "classes": "btn btn-outline-info", "_props": { "type": "button" }, "content": "Info" },
+                  { "name": "dark", "tag": "button", "classes": "btn btn-outline-dark", "_props": { "type": "button" }, "content": "Dark" }
+                ]
+              },
+              "sizes": {
+                "name": "sizes",
+                "tag": "div",
+                "classes": "d-flex flex-wrap align-items-center gap-2",
+                "content": [
+                  { "name": "lg", "tag": "button", "classes": "btn btn-primary btn-lg", "_props": { "type": "button" }, "content": "Large" },
+                  { "name": "sm", "tag": "button", "classes": "btn btn-primary btn-sm", "_props": { "type": "button" }, "content": "Small" },
+                  { "name": "block", "tag": "div", "classes": "d-grid gap-2 w-100 mt-2", "content": { "blockBtn": { "tag": "button", "classes": "btn btn-secondary", "_props": { "type": "button" }, "content": "Block (d-grid)" } } }
+                ]
+              }
+            }
+          },
+          {
+            "name": "alerts",
+            "tag": "section",
+            "classes": "container bg-body p-4 p-lg-5 rounded shadow-sm mt-4",
+            "_props": { "id": "alerts" },
+            "content": {
+              "heading": { "name": "heading", "tag": "h2", "classes": "h3 mb-3", "content": "Alertas" },
+              "description": { "name": "description", "tag": "p", "classes": "text-muted mb-4", "content": "Mensajes contextuales con y sin acciones." },
+              "simple": {
+                "name": "simple",
+                "tag": "div",
+                "content": [
+                  { "name": "primary", "tag": "div", "classes": "alert alert-primary", "content": "Alerta primaria con <a class=\"alert-link\">link</a>." },
+                  { "name": "secondary", "tag": "div", "classes": "alert alert-secondary", "content": "Alerta secundaria." },
+                  { "name": "success", "tag": "div", "classes": "alert alert-success", "content": "Operación exitosa." },
+                  { "name": "danger", "tag": "div", "classes": "alert alert-danger", "content": "Se produjo un error." },
+                  { "name": "warning", "tag": "div", "classes": "alert alert-warning", "content": "Advertencia pendiente." },
+                  { "name": "info", "tag": "div", "classes": "alert alert-info", "content": "Información útil." }
+                ]
+              },
+              "dismissible": {
+                "name": "dismissible",
+                "tag": "div",
+                "classes": "alert alert-warning alert-dismissible fade show",
+                "_props": { "role": "alert" },
+                "content": "Alerta descartable"
+              }
+            }
+          },
+          {
+            "name": "cards",
+            "tag": "section",
+            "classes": "container bg-body p-4 p-lg-5 rounded shadow-sm mt-4",
+            "_props": { "id": "cards" },
+            "content": {
+              "heading": { "name": "heading", "tag": "h2", "classes": "h3 mb-3", "content": "Tarjetas" },
+              "description": { "name": "description", "tag": "p", "classes": "text-muted mb-4", "content": "Contenedores de contenido flexibles." },
+              "grid": {
+                "name": "grid",
+                "tag": "div",
+                "classes": "row row-cols-1 row-cols-md-3 g-4",
+                "content": [
+                  {
+                    "name": "card1",
+                    "component": "Container",
+                    "classes": "card h-100",
+                    "content": {
+                      "body": { "tag": "div", "classes": "card-body", "content": { "title": { "tag": "h5", "classes": "card-title", "content": "Título de tarjeta" }, "text": { "tag": "p", "classes": "card-text", "content": "Contenido breve de la tarjeta." }, "btn": { "tag": "button", "classes": "btn btn-primary", "_props": { "type": "button" }, "content": "Ir" } } }
+                    }
+                  },
+                  {
+                    "name": "card2",
+                    "component": "Container",
+                    "classes": "card h-100 text-bg-dark",
+                    "content": {
+                      "body": { "tag": "div", "classes": "card-body", "content": { "title": { "tag": "h5", "classes": "card-title", "content": "Tarjeta oscura" }, "text": { "tag": "p", "classes": "card-text", "content": "Variante de alto contraste." } } }
+                    }
+                  },
+                  {
+                    "name": "card3",
+                    "component": "Container",
+                    "classes": "card border-primary h-100",
+                    "content": {
+                      "header": { "tag": "div", "classes": "card-header", "content": "Con cabecera" },
+                      "body": { "tag": "div", "classes": "card-body", "content": "Cuerpo con cabecera y footer." },
+                      "footer": { "tag": "div", "classes": "card-footer text-muted", "content": "Footer" }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "tables",
+            "tag": "section",
+            "classes": "container bg-body p-4 p-lg-5 rounded shadow-sm mt-4",
+            "_props": { "id": "tables" },
+            "content": {
+              "heading": { "name": "heading", "tag": "h2", "classes": "h3 mb-3", "content": "Tablas" },
+              "description": { "name": "description", "tag": "p", "classes": "text-muted mb-4", "content": "Variantes de tablas estilizadas." },
+              "table": {
+                "name": "table",
+                "tag": "table",
+                "classes": "table table-striped table-hover align-middle",
+                "_props": { "id": "tableExample" },
+                "content": {
+                  "thead": {
+                    "name": "thead",
+                    "tag": "thead",
+                    "content": {
+                      "row": { "tag": "tr", "content": { "name": { "tag": "th", "content": "Nombre" }, "role": { "tag": "th", "content": "Rol" }, "status": { "tag": "th", "content": "Estado" } } }
+                    }
+                  },
+                  "tbody": {
+                    "name": "tbody",
+                    "tag": "tbody",
+                    "content": [
+                      { "name": "row1", "tag": "tr", "content": { "name": { "tag": "td", "content": "Ana" }, "role": { "tag": "td", "content": "Diseñadora" }, "status": { "tag": "td", "content": "<span class=\"badge text-bg-success\">Activa</span>" } } },
+                      { "name": "row2", "tag": "tr", "content": { "name": { "tag": "td", "content": "Luis" }, "role": { "tag": "td", "content": "Backend" }, "status": { "tag": "td", "content": "<span class=\"badge text-bg-warning\">Pendiente</span>" } } },
+                      { "name": "row3", "tag": "tr", "content": { "name": { "tag": "td", "content": "Sofía" }, "role": { "tag": "td", "content": "Frontend" }, "status": { "tag": "td", "content": "<span class=\"badge text-bg-danger\">Bloqueada</span>" } } }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "forms",
+            "tag": "section",
+            "classes": "container bg-body p-4 p-lg-5 rounded shadow-sm mt-4",
+            "_props": { "id": "forms" },
+            "content": {
+              "heading": { "name": "heading", "tag": "h2", "classes": "h3 mb-3", "content": "Formularios" },
+              "description": { "name": "description", "tag": "p", "classes": "text-muted mb-4", "content": "Controles básicos y de validación." },
+              "form": {
+                "name": "form",
+                "tag": "form",
+                "classes": "row g-4",
+                "content": {
+                  "leftColumn": {
+                    "name": "leftColumn",
+                    "tag": "div",
+                    "classes": "col-lg-6",
+                    "content": {
+                      "emailGroup": {
+                        "name": "emailGroup",
+                        "tag": "div",
+                        "classes": "mb-3",
+                        "content": {
+                          "label": { "name": "label", "tag": "label", "classes": "form-label", "_props": { "for": "inputEmail" }, "content": "Correo electrónico" },
+                          "input": { "name": "input", "tag": "input", "classes": "form-control", "_props": { "type": "email", "id": "inputEmail", "placeholder": "nombre@correo.com" } },
+                          "help": { "name": "help", "tag": "div", "classes": "form-text", "content": "Nunca compartiremos tu correo con nadie más." }
+                        }
+                      },
+                      "selectGroup": {
+                        "name": "selectGroup",
+                        "tag": "div",
+                        "classes": "mb-3",
+                        "content": {
+                          "label": { "name": "label", "tag": "label", "classes": "form-label", "_props": { "for": "selectExample" }, "content": "Selecciona una opción" },
+                          "select": {
+                            "name": "select",
+                            "tag": "select",
+                            "classes": "form-select",
+                            "_props": { "id": "selectExample" },
+                            "content": [
+                              { "name": "optionDefault", "tag": "option", "_props": { "selected": true }, "content": "Elige..." },
+                              { "name": "option1", "tag": "option", "content": "Opción uno" },
+                              { "name": "option2", "tag": "option", "content": "Opción dos" },
+                              { "name": "option3", "tag": "option", "content": "Opción tres" }
+                            ]
+                          }
+                        }
+                      },
+                      "fileGroup": {
+                        "name": "fileGroup",
+                        "tag": "div",
+                        "classes": "mb-3",
+                        "content": {
+                          "label": { "name": "label", "tag": "label", "classes": "form-label", "_props": { "for": "fileInput" }, "content": "Carga un archivo" },
+                          "input": { "name": "input", "tag": "input", "classes": "form-control", "_props": { "type": "file", "id": "fileInput" } }
+                        }
+                      }
+                    }
+                  },
+                  "rightColumn": {
+                    "name": "rightColumn",
+                    "tag": "div",
+                    "classes": "col-lg-6",
+                    "content": {
+                      "check1": {
+                        "name": "check1",
+                        "tag": "div",
+                        "classes": "form-check mb-2",
+                        "content": {
+                          "input": { "name": "input", "tag": "input", "classes": "form-check-input", "_props": { "type": "checkbox", "id": "check1", "checked": true } },
+                          "label": { "name": "label", "tag": "label", "classes": "form-check-label", "_props": { "for": "check1" }, "content": "Opción seleccionada" }
+                        }
+                      },
+                      "radio1": {
+                        "name": "radio1",
+                        "tag": "div",
+                        "classes": "form-check mb-2",
+                        "content": {
+                          "input": { "name": "input", "tag": "input", "classes": "form-check-input", "_props": { "type": "radio", "name": "radioGroup", "id": "radio1", "checked": true } },
+                          "label": { "name": "label", "tag": "label", "classes": "form-check-label", "_props": { "for": "radio1" }, "content": "Opción A" }
+                        }
+                      },
+                      "radio2": {
+                        "name": "radio2",
+                        "tag": "div",
+                        "classes": "form-check mb-3",
+                        "content": {
+                          "input": { "name": "input", "tag": "input", "classes": "form-check-input", "_props": { "type": "radio", "name": "radioGroup", "id": "radio2" } },
+                          "label": { "name": "label", "tag": "label", "classes": "form-check-label", "_props": { "for": "radio2" }, "content": "Opción B" }
+                        }
+                      },
+                      "submit": {
+                        "name": "submit",
+                        "tag": "button",
+                        "classes": "btn btn-primary",
+                        "_props": { "type": "submit" },
+                        "content": "Enviar formulario"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "routes": []
+}

@@ -1,0 +1,103 @@
+{
+  "view": {
+    "name": "gallery",
+    "path": "gallery",
+    "component": "GalleryController",
+    "classes": "container py-5",
+    "content": {
+      "header": {
+        "name": "galleryHeader",
+        "tag": "section",
+        "classes": "text-center mb-5",
+        "content": {
+          "title": {
+            "name": "galleryTitle",
+            "tag": "h1",
+            "classes": "display-4 fw-bold text-primary mb-3",
+            "content": "Imágenes"
+          },
+          "subtitle": {
+            "name": "gallerySubtitle",
+            "tag": "p",
+            "classes": "lead text-muted mb-4",
+            "content": "Colección completa de imágenes registradas en el proyecto"
+          },
+          "stats": {
+            "name": "galleryStats",
+            "tag": "div",
+            "classes": "alert alert-info d-inline-block",
+            "content": {
+              "totalCount": {
+                "name": "totalCount",
+                "tag": "span",
+                "classes": "fw-bold",
+                "content": "${data/totalImages} imágenes disponibles"
+              }
+            }
+          }
+        }
+      },
+      "gallery": {
+        "name": "gridGallery",
+        "component": "GridContainer",
+        "classes": "g-4",
+        "colClasses": "auto-xs-12 auto-sm-6 auto-md-4 auto-lg-3 auto-xl-3 auto-xxl-2",
+        "content": "$definitions/imageTemplate"
+      }
+    }
+  },
+  "routes": [],
+  "definitions": {
+    "imageTemplate": {
+      "name": ["imageCard", "$imageItem/id"],
+      "tag": "div",
+      "classes": "card h-100 shadow-sm overflow-hidden",
+      "content": {
+        "imageContainer": {
+          "name": ["imgContainer", "$imageItem/id"],
+          "tag": "div",
+          "classes": "position-relative overflow-hidden",
+          "style": { "aspectRatio": "1" },
+          "content": {
+            "image": {
+              "name": ["img", "$imageItem/id"],
+              "component": "Image",
+              "src": "$imageItem/src",
+              "imageClasses": "w-100 h-100 object-fit-cover",
+              "classes": "card-img-top",
+              "_props": {
+                "alt": "$imageItem/id",
+                "loading": "lazy"
+              }
+            }
+          }
+        },
+        "cardBody": {
+          "name": ["cardBody", "$imageItem/id"],
+          "tag": "div",
+          "classes": "card-body p-3",
+          "content": {
+            "title": {
+              "name": ["cardTitle", "$imageItem/id"],
+              "tag": "h3",
+              "classes": "card-title mb-1 text-truncate fw-bold fs-6",
+              "content": "$imageItem/id"
+            },
+            "path": {
+              "name": ["cardPath", "$imageItem/id"],
+              "tag": "small",
+              "classes": "text-muted d-block text-truncate",
+              "content": "$imageItem/src"
+            }
+          }
+        }
+      }
+    }
+  },
+  "data": {
+    "totalImages": "$definitions/imagesArr/length"
+  },
+  "rules": {
+    "$definitions/imageTemplate": ["iterate", "$definitions/imagesArr", "imageItem"]
+  }
+}
