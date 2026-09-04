@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "scripts": {
+    "start": "yarn workspace dbl-seed start",
     "build": "yarn workspaces run build",
     "build:core": "yarn workspace @dblimp/core run build",
     "build:bs5": "yarn workspace @dblimp/bs5 run build",
