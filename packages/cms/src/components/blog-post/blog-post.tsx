@@ -1,12 +1,12 @@
-import GoatComponent, {
-  GoatComponentProps,
-} from "@dblimp/core/goat-component";
+import JsonRenderComponent, {
+  JsonRenderComponentProps,
+} from "@dblimp/core/json-render-component";
 import { resolveRefs } from "@dblimp/core";
 
 import schema from "./blog-post.json";
 import "./style.scss";
 
-export interface BlogPostProps extends GoatComponentProps {
+export interface BlogPostProps extends JsonRenderComponentProps {
   title: any;
   resume: any;
   imageSrc: string | string[];
@@ -17,12 +17,12 @@ export interface BlogPostProps extends GoatComponentProps {
   image: string;
 }
 
-export default class BlogPost extends GoatComponent<BlogPostProps> {
+export default class BlogPost extends JsonRenderComponent<BlogPostProps> {
   static jsClass = "BlogPost";
   static template = schema;
   static slots = ["title", "resume", "description"];
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     childrenIn: undefined,
     title: "",
     resume: "",
@@ -52,7 +52,7 @@ export default class BlogPost extends GoatComponent<BlogPostProps> {
   }
 
   componentDidUpdate(
-    prevProps: Readonly<GoatComponentProps>,
+    prevProps: Readonly<JsonRenderComponentProps>,
     prevState: Readonly<{}>,
     snapshot?: any
   ): void {

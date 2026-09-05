@@ -1,5 +1,5 @@
 import Component, { ComponentProps } from "./component";
-import { addComponents } from "./components";
+import { addComponents } from "./component-registry";
 import Link from "./navigation/react-router-link";
 import NavLink from "./navigation/react-router-navlink";
 
@@ -12,6 +12,8 @@ const NAVIGATION_COMPONENTS: NavigationComponents = {
   Link,
   NavLink,
 };
+
+addComponents(NAVIGATION_COMPONENTS);
 
 export const addNavigationComponents = (
   navigationComponents: NavigationComponents

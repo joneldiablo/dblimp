@@ -1,0 +1,77 @@
+{
+  "view": {
+    "name": "icons",
+    "path": "icons",
+    "classes": "container py-5",
+    "content": {
+      "header": {
+        "name": "iconsHeader",
+        "tag": "section",
+        "classes": "text-center mb-5",
+        "content": {
+          "title": {
+            "name": "iconsTitle",
+            "tag": "h1",
+            "classes": "display-4 fw-bold text-primary mb-3",
+            "content": "Iconos"
+          },
+          "subtitle": {
+            "name": "iconsSubtitle",
+            "tag": "p",
+            "classes": "lead text-muted mb-4",
+            "content": "Catálogo completo de iconos disponibles"
+          },
+          "stats": {
+            "name": "iconsStats",
+            "tag": "div",
+            "classes": "alert alert-info d-inline-block",
+            "content": {
+              "totalCount": {
+                "name": "totalCount",
+                "tag": "span",
+                "classes": "fw-bold",
+                "content": "${data/totalIcons} iconos disponibles"
+              }
+            }
+          }
+        }
+      },
+      "icons": {
+        "name": "gridIcons",
+        "component": "GridContainer",
+        "fullWidth": true,
+        "classes": "row g-4",
+        "colClasses": "auto-xs-12 auto-sm-6 auto-md-4 auto-lg-3 auto-xl-3 auto-xxl-2",
+        "content": "$definitions/iconTemplate"
+      }
+    }
+  },
+  "routes": [],
+  "definitions": {
+    "iconTemplate": {
+      "name": ["iconSpan", "$iconName"],
+      "tag": "div",
+      "classes": "d-flex flex-column align-items-center gap-2 p-3 border rounded bg-body-secondary h-100",
+      "content": [
+        {
+          "name": ["iconPreview", "$iconName"],
+          "component": "Icons",
+          "icon": "$iconName",
+          "classes": "fs-1"
+        },
+        {
+          "name": ["iconLabel", "$iconName"],
+          "tag": "small",
+          "classes": "text-muted text-truncate w-100 text-center",
+          "content": "$iconName"
+        }
+      ]
+    }
+  },
+  "data": {
+    "totalIcons": "$definitions/iconsArr/length"
+  },
+  "rules": {
+    "$definitions/iconTemplate": ["iterate", "$definitions/iconsArr", "iconName"]
+  }
+}

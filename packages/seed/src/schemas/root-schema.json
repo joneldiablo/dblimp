@@ -1,0 +1,46 @@
+{
+  "view": {
+    "ref": "$definitions/rootTpl",
+    "style/--tpl-home-header": "0px"
+  },
+  "definitions": {
+    "rootTplVars": {
+      "headerClasses": "seed-root-header",
+      "headerBottomClasses": "seed-root-footer",
+      "navItems": [
+        {
+          "label": "Home",
+          "to": "/"
+        },
+        {
+          "label": "Gallery",
+          "to": "/gallery"
+        },
+        {
+          "label": "Icons",
+          "to": "/icons"
+        },
+        {
+          "label": "SVGs",
+          "to": "/svgs"
+        },
+        {
+          "label": "Bootstrap Preview",
+          "to": "/bootstrap-preview"
+        },
+        {
+          "label": "Screen Preview",
+          "to": "/screen-preview"
+        }
+      ]
+    }
+  },
+  "routes": [
+    "$routes/home",
+    "$routes/gallery",
+    "$routes/icons",
+    "$routes/svgs",
+    "$routes/bootstrap-preview",
+    "$routes/screen-preview"
+  ]
+}

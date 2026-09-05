@@ -1,0 +1,14 @@
+{
+  "seedMeta": {
+    "projectName": "dbl-seed",
+    "description": "Schema-first frontend starter con configuracion de assets, iconos y SVGs."
+  },
+  "heroBannerDefault": {
+    "component": "HeroBanner",
+    "eyebrow": "Seed Hero",
+    "title": "Reemplaza el contenido, conserva la estructura",
+    "body": "Definicion reutilizable que demuestra como la semilla mantiene el contenido del producto separado del contrato estructural.",
+    "primaryCta": "Edita el schema de la ruta",
+    "secondaryCta": "Edita el estado del controller"
+  }
+}

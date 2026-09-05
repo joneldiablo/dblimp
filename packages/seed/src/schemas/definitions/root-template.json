@@ -1,0 +1,34 @@
+{
+  "rootTpl": {
+    "name": "rootTpl",
+    "component": "RootController",
+    "content": {
+      "header": {
+        "name": "rootHeader",
+        "tag": "header",
+        "classes": "seed-root-header",
+        "content": {
+          "brand": {
+            "tag": "strong",
+            "content": "dbl-seed"
+          },
+          "summary": {
+            "tag": "span",
+            "content": "Starter schema-first"
+          }
+        }
+      },
+      "main": {
+        "name": "rootOutlet",
+        "tag": "main",
+        "classes": "seed-root-main"
+      },
+      "footer": {
+        "name": "rootFooter",
+        "tag": "footer",
+        "classes": "seed-root-footer",
+        "content": "Semilla para proyectos con @dblimp."
+      }
+    }
+  }
+}

@@ -4,23 +4,23 @@ import { Value, View } from "react-calendar/dist/shared/types";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 
-import GoatComponent, {
-  GoatComponentProps,
-  GoatComponentState,
-} from "@dblimp/core/goat-component";
+import JsonRenderComponent, {
+  JsonRenderComponentProps,
+  JsonRenderComponentState,
+} from "@dblimp/core/json-render-component";
 import { eventHandler } from "@dblimp/core";
 
 import schema from "./calendar-field.json";
 
 import "./style.scss";
 
-export interface CalendarFieldProps extends GoatComponentProps {
+export interface CalendarFieldProps extends JsonRenderComponentProps {
   calendarProps: Partial<CalendarProps>;
 }
 
-export interface CalendarFieldState extends GoatComponentState {}
+export interface CalendarFieldState extends JsonRenderComponentState {}
 
-export default class CalendarField extends GoatComponent<
+export default class CalendarField extends JsonRenderComponent<
   CalendarFieldProps,
   CalendarFieldState
 > {
@@ -28,7 +28,7 @@ export default class CalendarField extends GoatComponent<
   static template = schema;
   static slots: string[] = [];
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     calendarProps: {},
     childrenIn: undefined,
   };

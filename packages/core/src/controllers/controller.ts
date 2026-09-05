@@ -1,18 +1,17 @@
-import React, { Component, ReactNode } from "react";
-import GoatContainer, {
-  GoatContainerProps,
-  GoatContainerState,
-} from "../containers/goat-container";
+import JsonRenderContainer, {
+  JsonRenderContainerProps,
+  JsonRenderContainerState,
+} from "../containers/json-render-container";
 
 // Definimos la interfaz para las propiedades del componente
-export interface ControllerProps extends GoatContainerProps {
+export interface ControllerProps extends JsonRenderContainerProps {
   test?: boolean;
   routesIn?: string;
-  [key: string]: any; // Permite heredar props dinámicamente de GoatContainer
+  [key: string]: any; // Permite heredar props dinámicamente de JsonRenderContainer
 }
 
 // Definimos la interfaz para el estado del componente
-export interface ControllerState extends GoatContainerState {
+export interface ControllerState extends JsonRenderContainerState {
   localClasses: string;
 }
 
@@ -22,11 +21,11 @@ export interface ControllerState extends GoatContainerState {
 export default class Controller<
   TProps extends ControllerProps = ControllerProps,
   TState extends ControllerState = ControllerState
-> extends GoatContainer<TProps, TState> {
+> extends JsonRenderContainer<TProps, TState> {
   static jsClass = "Controller";
 
   static defaultProps: Partial<ControllerProps> = {
-    ...GoatContainer.defaultProps,
+    ...JsonRenderContainer.defaultProps,
     test: false,
   };
   static template = null;

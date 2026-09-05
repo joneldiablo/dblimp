@@ -1,11 +1,11 @@
 import React from "react";
 import Component, { ComponentProps } from "./component";
-import { addComponents } from "./components";
+import { addComponents } from "./component-registry";
 
 import Container from "./containers/container";
 import DetailsContainer from "./containers/details-container";
 import FormContainer from "./containers/form-container";
-import GoatContainer from "./containers/goat-container";
+import JsonRenderContainer from "./containers/json-render-container";
 import GridContainer from "./containers/grid-container";
 import ListContainer from "./containers/list-container";
 import AutoResponsiveContainer from "./containers/auto-responsive-container";
@@ -28,7 +28,7 @@ const CONTAINERS: Record<
   FetchContainer,
   FlexContainer,
   FormContainer,
-  GoatContainer,
+  JsonRenderContainer,
   GridContainer,
   GridSwitchContainer,
   ListContainer,
@@ -42,5 +42,7 @@ export const addContainers = (containers: Record<string, typeof Container> | Rea
   Object.assign(CONTAINERS, containers);
   addComponents(containers as Record<string, typeof Component<any, any>>);
 }
+
+addComponents(CONTAINERS as Record<string, React.FC<any> | typeof Component<any, any>>);
 
 export default CONTAINERS;

@@ -1,0 +1,93 @@
+{
+  "view": {
+    "name": "svgs",
+    "path": "svgs",
+    "classes": "container py-5",
+    "content": {
+      "header": {
+        "name": "svgsHeader",
+        "tag": "section",
+        "classes": "text-center mb-5",
+        "content": {
+          "title": {
+            "name": "svgsTitle",
+            "tag": "h1",
+            "classes": "display-4 fw-bold text-primary mb-3",
+            "content": "SVGs"
+          },
+          "subtitle": {
+            "name": "svgsSubtitle",
+            "tag": "p",
+            "classes": "lead text-muted mb-4",
+            "content": "Catálogo de SVGs inline registrados en el proyecto"
+          },
+          "stats": {
+            "name": "svgsStats",
+            "tag": "div",
+            "classes": "alert alert-info d-inline-block",
+            "content": {
+              "totalCount": {
+                "name": "totalCount",
+                "tag": "span",
+                "classes": "fw-bold",
+                "content": "${data/totalSvgs} SVGs registrados"
+              }
+            }
+          }
+        }
+      },
+      "svgs": {
+        "name": "gridSvgs",
+        "component": "GridContainer",
+        "fullWidth": true,
+        "classes": "row g-4",
+        "colClasses": "auto-xs-12 auto-sm-6 auto-md-4 auto-lg-3",
+        "content": "$definitions/svgTemplate"
+      }
+    }
+  },
+  "routes": [],
+  "definitions": {
+    "svgTemplate": {
+      "name": ["svgCard", "$svgItem/name"],
+      "tag": "div",
+      "classes": "card h-100 shadow-sm text-center",
+      "content": {
+        "svgPreview": {
+          "name": ["svgPreview", "$svgItem/name"],
+          "tag": "div",
+          "classes": "card-body d-flex align-items-center justify-content-center",
+          "style": { "minHeight": "120px" },
+          "content": {
+            "svgComp": {
+              "name": ["svgComp", "$svgItem/name"],
+              "component": "InlineSvg",
+              "svg": "$svgItem/svg",
+              "classes": "w-100",
+              "style": { "maxWidth": "80px", "maxHeight": "80px" }
+            }
+          }
+        },
+        "cardFooter": {
+          "name": ["svgFooter", "$svgItem/name"],
+          "tag": "div",
+          "classes": "card-footer bg-body-secondary",
+          "content": {
+            "label": {
+              "name": ["svgLabel", "$svgItem/name"],
+              "tag": "small",
+              "classes": "text-muted fw-bold",
+              "content": "$svgItem/name"
+            }
+          }
+        }
+      }
+    }
+  },
+  "data": {
+    "totalSvgs": "$definitions/svgsArr/length"
+  },
+  "rules": {
+    "$definitions/svgTemplate": ["iterate", "$definitions/svgsArr", "svgItem"]
+  }
+}

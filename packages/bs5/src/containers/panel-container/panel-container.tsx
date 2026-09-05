@@ -1,6 +1,6 @@
 import React from "react";
 
-import { eventHandler } from "@dblimp/core";
+import { eventHandler, JsonRender } from "@dblimp/core";
 import Component, {
   nameSuffixes,
   ComplexComponentProps,
@@ -207,7 +207,7 @@ export default class PanelContainer extends Component<
       case name + "ContentTop":
         const active = !!this.props.contentTop;
         const content = active
-          ? this.goat.buildContent(this.props.contentTop)
+          ? this.jsonRender.buildContent(this.props.contentTop)
           : null;
         return { active, content };
       case name + "IconTF":

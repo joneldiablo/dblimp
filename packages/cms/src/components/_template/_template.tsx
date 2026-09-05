@@ -1,29 +1,29 @@
 import hash from "object-hash";
 
-import GoatComponent, {
-  GoatComponentProps,
-  GoatComponentState,
-} from "@dblimp/core/goat-component";
+import JsonRenderComponent, {
+  JsonRenderComponentProps,
+  JsonRenderComponentState,
+} from "@dblimp/core/json-render-component";
 import { deepMerge, resolveRefs } from "@dblimp/core";
 
 import schema from "./_template.json";
 import "./_template.scss";
 
-export interface CmsTemplateProps extends GoatComponentProps {
+export interface CmsTemplateProps extends JsonRenderComponentProps {
   _templateArrayProp?: any[];
 }
 
-export interface CmsTemplateState extends GoatComponentState {}
+export interface CmsTemplateState extends JsonRenderComponentState {}
 
 export default class CmsTemplate<
-  TProps extends GoatComponentProps = CmsTemplateProps,
-  TState extends GoatComponentState = CmsTemplateState
-> extends GoatComponent<CmsTemplateProps, CmsTemplateState> {
+  TProps extends JsonRenderComponentProps = CmsTemplateProps,
+  TState extends JsonRenderComponentState = CmsTemplateState
+> extends JsonRenderComponent<CmsTemplateProps, CmsTemplateState> {
   static jsClass = "CmsTemplate";
   static template = schema;
   static slots: string[] = [];
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     childrenIn: undefined,
   };
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Goat } from "@dblimp/core";
+import { JsonRender } from "@dblimp/core";
 
 import Field, { FieldProps, FieldState } from "./field";
 
@@ -18,13 +18,13 @@ export default class RadioField<
     labelInline: true,
   };
 
-  goat;
+  jsonRender: JsonRender;
 
   constructor(props: TProps) {
     super(props);
     this.state = this.state as TState;
     const { mutations, ...propsRender } = props;
-    this.goat = new Goat(propsRender, mutations);
+    this.jsonRender = new JsonRender(propsRender, mutations);
   }
 
   get type() {
@@ -138,9 +138,9 @@ export default class RadioField<
       ? React.createElement(
           React.Fragment,
           {},
-          label(this.goat.buildContent(labels[0])),
+          label(this.jsonRender.buildContent(labels[0])),
           React.createElement("input", { ...inputProps }),
-          label(this.goat.buildContent(labels[1]))
+          label(this.jsonRender.buildContent(labels[1]))
         )
       : React.createElement("input", { ...inputProps });
 
@@ -154,9 +154,9 @@ export default class RadioField<
           .join(" "),
         style: { pointerEvents: readOnly ? "none" : null },
       },
-      first === "label" && label(this.goat.buildContent(item.label)),
+      first === "label" && label(this.jsonRender.buildContent(item.label)),
       theInput,
-      first === "control" && label(this.goat.buildContent(item.label))
+      first === "control" && label(this.jsonRender.buildContent(item.label))
     );
   };
 

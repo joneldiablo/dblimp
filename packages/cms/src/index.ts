@@ -52,7 +52,7 @@ export const CMS_COMPONENTS = {
 
 /**
  * Registers the CMS components (and the base registry types they depend on)
- * into the Goat/schema component registry. Call this once, e.g. when
+ * into the JsonRender/schema component registry. Call this once, e.g. when
  * importing the package.
  */
 export const registerCmsComponents = (): boolean => {

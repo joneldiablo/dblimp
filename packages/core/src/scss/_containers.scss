@@ -1,0 +1,5 @@
+@import "./containers/grid-container";
+@import "./containers/panel-container";
+
+// NOTE: splide theme lives in @dblimp/splide (not imported here to avoid a
+// hard dependency on @splidejs/splide in core's shared stylesheet).

@@ -1,0 +1,44 @@
+{
+  "view": {
+    "name": "screen-preview",
+    "path": "screen-preview",
+    "component": "ScreenPreviewController",
+    "classes": "container py-5",
+    "content": {
+      "header": {
+        "name": "screenPreviewHeader",
+        "tag": "section",
+        "classes": "text-center mb-5",
+        "content": {
+          "title": {
+            "name": "screenPreviewTitle",
+            "tag": "h1",
+            "classes": "display-4 fw-bold text-primary mb-3",
+            "content": "Previsualización de pantallas"
+          },
+          "subtitle": {
+            "name": "screenPreviewSubtitle",
+            "tag": "p",
+            "classes": "lead text-muted mb-4",
+            "content": "Selecciona una pantalla del proyecto para previsualizarla en un marco de navegador."
+          }
+        }
+      },
+      "preview": {
+        "name": "screenSelector",
+        "component": "ScreenSelector",
+        "screens": "$definitions/screenScreens"
+      }
+    }
+  },
+  "routes": [],
+  "definitions": {
+    "screenScreens": [
+      { "label": "Home", "path": "/" },
+      { "label": "Gallery", "path": "/gallery" },
+      { "label": "Icons", "path": "/icons" },
+      { "label": "SVGs", "path": "/svgs" },
+      { "label": "Bootstrap Preview", "path": "/bootstrap-preview" }
+    ]
+  }
+}

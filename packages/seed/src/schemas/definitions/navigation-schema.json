@@ -1,0 +1,17 @@
+{
+  "navigation": {
+    "homeLink": {
+      "name": "homeLink",
+      "to": "/",
+      "label": "Home",
+      "title": "dbl-seed starter",
+      "description": "Ruta de inicio para aplicaciones guiadas por schema."
+    }
+  },
+  "headerNav": [
+    "$definitions/navigation/homeLink"
+  ],
+  "footerNav": [
+    "$definitions/navigation/homeLink"
+  ]
+}

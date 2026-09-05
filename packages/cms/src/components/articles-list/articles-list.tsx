@@ -1,15 +1,15 @@
 import hash from "object-hash";
 import { Location } from "react-router";
 
-import GoatComponent, {
-  GoatComponentProps,
-} from "@dblimp/core/goat-component";
+import JsonRenderComponent, {
+  JsonRenderComponentProps,
+} from "@dblimp/core/json-render-component";
 import { deepMerge, resolveRefs, eventHandler } from "@dblimp/core";
 
 import schema from "./articles-list.json";
 import "./style.scss";
 
-export interface ArticlesListProps extends GoatComponentProps {
+export interface ArticlesListProps extends JsonRenderComponentProps {
   articles: any[];
   filterFields: any[];
   basePath: string;
@@ -25,12 +25,12 @@ export interface ArticlesListProps extends GoatComponentProps {
   disabled?: boolean;
 }
 
-export default class ArticlesList extends GoatComponent<ArticlesListProps> {
+export default class ArticlesList extends JsonRenderComponent<ArticlesListProps> {
   static jsClass = "ArticlesList";
   static template = schema;
   static slots: string[] = [];
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     childrenIn: undefined,
     filters: [],
     activeColor: "primary",

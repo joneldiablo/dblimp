@@ -1,14 +1,14 @@
 import { deepMerge, resolveRefs } from "@dblimp/core";
 import {
-  GoatComponent,
-  GoatComponentProps,
-  GoatComponentState,
+  JsonRenderComponent,
+  JsonRenderComponentProps,
+  JsonRenderComponentState,
 } from "@dblimp/core";
 import "./style.scss";
 
 import schema from "./card-navigation.json";
 
-export interface CardNavigationProps extends GoatComponentProps {
+export interface CardNavigationProps extends JsonRenderComponentProps {
   title: any;
   description: any;
   imageSrc: string | string[];
@@ -19,11 +19,11 @@ export interface CardNavigationProps extends GoatComponentProps {
   labelClasses: string | string[];
 }
 
-export interface CardNavigationState extends GoatComponentState {
+export interface CardNavigationState extends JsonRenderComponentState {
   menuLinksCards: string[];
 }
 
-export default class CardNavigation extends GoatComponent<
+export default class CardNavigation extends JsonRenderComponent<
   CardNavigationProps,
   CardNavigationState
 > {
@@ -31,7 +31,7 @@ export default class CardNavigation extends GoatComponent<
   static template = schema;
   static slots = [];
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     cardClasses: "",
     iconClasses: "",
     labelClasses: "",

@@ -1,0 +1,58 @@
+{
+  "view": {
+    "name": "home",
+    "index": true,
+    "component": "HomeController",
+    "content": {
+      "hero": {
+        "name": "homeHero",
+        "component": "HeroBanner"
+      },
+      "kicker": {
+        "tag": "p",
+        "classes": "seed-kicker",
+        "content": "dbl-seed"
+      },
+      "title": {
+        "tag": "h1",
+        "content": "Starter con sistema de design dbl"
+      },
+      "intro": {
+        "tag": "p",
+        "content": "Esta semilla incluye configuración de appCtrl (imágenes, íconos, SVGs) y varias pantallas de revisión de assets y preview. Usala como punto de partida para nuevos proyectos con @dblimp."
+      },
+      "tools": {
+        "tag": "section",
+        "classes": "seed-tools",
+        "content": {
+          "galleryLink": {
+            "component": "Link",
+            "classes": "seed-tool-link",
+            "to": "/gallery",
+            "content": "Galería de imágenes"
+          },
+          "iconsLink": {
+            "component": "Link",
+            "to": "/icons",
+            "content": "Catálogo de íconos"
+          },
+          "svgsLink": {
+            "component": "Link",
+            "to": "/svgs",
+            "content": "SVGs inline"
+          },
+          "bootstrapLink": {
+            "component": "Link",
+            "to": "/bootstrap-preview",
+            "content": "Preview Bootstrap"
+          },
+          "screenLink": {
+            "component": "Link",
+            "to": "/screen-preview",
+            "content": "Previsualización de pantallas"
+          }
+        }
+      }
+    }
+  }
+}

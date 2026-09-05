@@ -1,16 +1,16 @@
 import React from "react";
 
 import { resolveRefs } from "@dblimp/core";
-import GoatComponent, {
-  GoatComponentProps,
-} from "@dblimp/core/goat-component";
+import JsonRenderComponent, {
+  JsonRenderComponentProps,
+} from "@dblimp/core/json-render-component";
 
 import { resolveSrc } from "../../utils/assets";
 
 import schema from "./header-blog.json";
 import "./style.scss";
 
-export interface HeaderBlogProps extends GoatComponentProps {
+export interface HeaderBlogProps extends JsonRenderComponentProps {
   title?: any;
   description?: any;
   imageSrc: string | string[];
@@ -18,12 +18,12 @@ export interface HeaderBlogProps extends GoatComponentProps {
   left?: { title: any; description: any }[];
 }
 
-export default class HeaderBlog extends GoatComponent<HeaderBlogProps> {
+export default class HeaderBlog extends JsonRenderComponent<HeaderBlogProps> {
   static jsClass = "HeaderBlog";
   static template = schema;
   static slots = ["title", "description"];
   static defaultProps = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     childrenIn: undefined,
     titleTag: "h1",
     titleClasses: "text-primary",

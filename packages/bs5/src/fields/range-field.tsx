@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 
 import { resolveRefs, eventHandler } from "@dblimp/core";
-import { Goat } from "@dblimp/core";
+import { JsonRender } from "@dblimp/core";
 
 import Field, { FieldProps, FieldState } from "./field";
 
@@ -68,13 +68,13 @@ export default class RangeField extends Field<
   };
 
   events: [string, (data: any) => void][] = [];
-  goat;
   schemaInput;
+  jsonRender: JsonRender;
 
   constructor(props: RangeFieldProps) {
     super(props);
     this.mutations = this.mutations.bind(this);
-    this.goat = new Goat(props, this.mutations);
+    this.jsonRender = new JsonRender(props, this.mutations);
     this.schemaInput = resolveRefs(schemaInput.control, {
       definitions: {
         ...schemaInput.definitions,
@@ -123,7 +123,7 @@ export default class RangeField extends Field<
   }
 
   get inputNode(): any {
-    return this.goat.buildContent(this.schemaInput, 0);
+    return this.jsonRender.buildContent(this.schemaInput, 0);
   }
 
   onValuesChange(data: any) {

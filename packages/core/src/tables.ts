@@ -1,5 +1,5 @@
 import Component, { ComponentProps } from "./component";
-import { addComponents } from "./components";
+import { addComponents } from "./component-registry";
 
 export type Tables = Record<string, typeof Component | React.FC<ComponentProps> | any>;
 

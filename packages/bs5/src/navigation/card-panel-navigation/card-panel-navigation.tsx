@@ -1,25 +1,25 @@
 import {
-  GoatComponent,
-  GoatComponentProps,
-  GoatComponentState,
+  JsonRenderComponent,
+  JsonRenderComponentProps,
+  JsonRenderComponentState,
 } from "@dblimp/core";
 
 import schema from "./card-panel-navigation.json";
 import "./style.scss";
 
-export interface CardPanelNavigationProps extends GoatComponentProps {
+export interface CardPanelNavigationProps extends JsonRenderComponentProps {
   location: any;
   basePath: string;
 }
 
-export interface CardPanelNavigationState extends GoatComponentState {
+export interface CardPanelNavigationState extends JsonRenderComponentState {
   size: any;
 }
 
 /**
  * Navigation panel rendering cards or route panels depending on active path and breakpoint.
  */
-export default class CardPanelNavigation extends GoatComponent<
+export default class CardPanelNavigation extends JsonRenderComponent<
   CardPanelNavigationProps,
   CardPanelNavigationState
 > {
@@ -27,7 +27,7 @@ export default class CardPanelNavigation extends GoatComponent<
   static override template = schema as any;
   static slots = [];
   static override defaultProps: Partial<CardPanelNavigationProps> = {
-    ...GoatComponent.defaultProps,
+    ...JsonRenderComponent.defaultProps,
     childrenIn: false,
   };
 

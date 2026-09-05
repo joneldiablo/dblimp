@@ -1,6 +1,6 @@
 import { resolveRefs, eventHandler } from "@dblimp/core";
 import Component, { ComponentProps } from "@dblimp/core/component";
-import Goat from "@dblimp/core/goat";
+import JsonRender from "@dblimp/core/json-render";
 
 
 interface ActionComponentProps extends ComponentProps {
@@ -75,7 +75,7 @@ export default class ActionComponent extends Component<ActionComponentProps> {
   protected tag: any = "button";
   protected classes = "d-inline-flex align-items-center";
   protected schema;
-  protected goat;
+  protected jsonRender;
 
   constructor(props: ActionComponentProps) {
     super(props);
@@ -86,7 +86,7 @@ export default class ActionComponent extends Component<ActionComponentProps> {
     });
     this.eventHandlers.onClick = this.onClick;
     this.schema = resolveRefs(ActionComponent.schemaContent, { props });
-    this.goat = new Goat({ ...props }, this.mutations.bind(this));
+    this.jsonRender = new JsonRender({ ...props }, this.mutations.bind(this));
   }
 
   protected onClick(e: any) {
@@ -136,7 +136,7 @@ export default class ActionComponent extends Component<ActionComponentProps> {
   }
 
   protected content(): React.ReactNode {
-    return this.goat.buildContent(this.schema);
+    return this.jsonRender.buildContent(this.schema);
   }
 
   protected mutations(name: string, config: Record<string, any>) {

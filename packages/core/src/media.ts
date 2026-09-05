@@ -1,5 +1,5 @@
 import Component, { ComponentProps } from "./component";
-import { addComponents } from "./components";
+import { addComponents } from "./component-registry";
 import Image from "./media/image";
 import Svg from "./media/svg";
 import SvgImports from "./media/svg-imports";
@@ -42,6 +42,8 @@ export const addMediaComponents = (mediaComponents: MediaComponents): void => {
   Object.assign(MEDIA_COMPONENTS, mediaComponents);
   addComponents(mediaComponents as Record<string, typeof Component<any, any>>);
 };
+
+addComponents(MEDIA_COMPONENTS as Record<string, React.FC<any> | typeof Component<any, any>>);
 
 /**
  * Default export exposing all registered media components.
