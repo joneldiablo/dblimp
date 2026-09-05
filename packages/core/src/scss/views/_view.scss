@@ -1,0 +1,27 @@
+// test-view
+.test-view-wrapper {
+  border: 1px solid rgba(red, var(--dbl-test-opacity));
+  padding: 1px;
+  margin: 1px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  &::before {
+    content: var(--component-name, "");
+    opacity: .6;
+    font-size: .6rem;
+  }
+}
+
+.test-section-wrapper {
+  border: 1px solid rgba(blue, var(--dbl-test-opacity));
+  padding: 1px;
+  margin: 1px;
+
+  &::before {
+    content: var(--component-name, "");
+    opacity: .6;
+    font-size: .6rem;
+  }
+}

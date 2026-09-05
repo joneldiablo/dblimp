@@ -1,0 +1,8 @@
+// dbl styles — requiere contexto de variables/mixins de bootstrap.
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+
+@import "@dblimp/core/styles";
+@import "@dblimp/core/styles/utilities";

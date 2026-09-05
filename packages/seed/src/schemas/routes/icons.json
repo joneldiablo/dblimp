@@ -41,7 +41,7 @@
         "component": "GridContainer",
         "fullWidth": true,
         "classes": "row g-4",
-        "colClasses": "col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2",
+        "colClasses": "auto-xs-12 auto-sm-6 auto-md-4 auto-lg-3 auto-xl-3 auto-xxl-2",
         "content": "$definitions/iconTemplate"
       }
     }
@@ -57,7 +57,7 @@
           "name": ["iconPreview", "$iconName"],
           "component": "Icons",
           "icon": "$iconName",
-          "size": 32
+          "classes": "fs-1"
         },
         {
           "name": ["iconLabel", "$iconName"],

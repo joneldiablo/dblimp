@@ -1,0 +1,30 @@
+@keyframes anim-rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.Svg,
+.Icons {
+  &.icon-inline {
+    width: var(--bs-body-font-size, 1rem);
+    vertical-align: baseline;
+    margin-bottom: -1px;
+  }
+
+  &.small {
+    font-size: 0.5em;
+  }
+}
+
+.img-cover {
+  object-fit: cover;
+}
+
+.spinner {
+  animation: anim-rotate 2s infinite linear;
+}

@@ -36,6 +36,8 @@
       "types": "./dist/types/components.d.ts",
       "source": "./src/components.ts"
     },
+    "./styles": "./src/scss/style.scss",
+    "./styles/utilities": "./src/scss/utilities/_index.scss",
     "./package.json": "./package.json"
   },
   "scripts": {
