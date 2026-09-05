@@ -1,6 +1,6 @@
 {
   "name": "@dblimp/icomoon",
-  "version": "1.0.3-dev",
+  "version": "1.0.3",
   "description": "Icomoon icon component for @dbl framework",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

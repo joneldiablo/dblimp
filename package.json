@@ -1,6 +1,6 @@
 {
   "name": "dbl-ts-monorepo",
-  "version": "1.0.3-dev",
+  "version": "1.0.3",
   "private": true,
   "workspaces": [
     "packages/*"
