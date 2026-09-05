@@ -6,6 +6,7 @@ import resolveRefs from "dbl-utils/resolve-refs";
 
 import JsonRender from "./json-render";
 import Component, { ComponentProps, ComponentState } from "./component";
+import { addComponents } from "./component-registry";
 
 export interface JsonRenderComponentProps extends ComponentProps {
   view?: any;
@@ -120,3 +121,5 @@ export default class JsonRenderComponent<
     );
   }
 }
+
+addComponents({ JsonRenderComponent });

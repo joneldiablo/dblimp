@@ -3,6 +3,13 @@
   "version": "1.0.0-dev",
   "private": true,
   "node": ">=20.18.1",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "serve -s dist"
+  },
   "dependencies": {
     "@dblimp/bs5": "1.0.2-dev",
     "@dblimp/cms": "1.0.2-dev",
@@ -16,42 +23,17 @@
     "react": "^19.0.0",
     "react-calendar": "^6.0.0",
     "react-dom": "^19.0.0",
-    "react-router": "7.0.1",
-    "react-router-dom": "7.0.1",
-    "react-scripts": "^5.0.1",
+    "react-router": "^7.18.0",
+    "react-router-dom": "^7.18.0",
     "serve": "^14.2.4",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test --watchAll=false",
-    "eject": "react-scripts eject",
-    "serve": "serve -s build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@types/jest": "^29.5.14",
-    "react-app-rewired": "^2.2.1",
-    "typescript": "^5.6.3"
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "^5.6.3",
+    "vite": "^7.0.0"
   }
 }

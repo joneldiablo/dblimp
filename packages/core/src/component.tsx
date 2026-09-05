@@ -1,4 +1,4 @@
-import React, { createRef, ReactNode, JSX, ExoticComponent } from "react";
+import React, { createElement, createRef, ReactNode, JSX, ExoticComponent } from "react";
 import eventHandler from "dbl-utils/event-handler";
 
 /**
@@ -169,7 +169,7 @@ export default class Component<
     }
     const content = this.content();
     const Tag = tag === undefined ? this.tag : tag;
-    if (Tag === false) return <>{content} </>;
+    if (Tag === false) return <>{content}</>;
     const TheTag = Tag as keyof JSX.IntrinsicElements;
 
     const cn: (string | string[])[] = [
@@ -197,6 +197,16 @@ export default class Component<
             ...this.componentProps,
           };
 
-    return active ? <TheTag {...props}> {content}</TheTag> : <React.Fragment />;
+    if (!active) return <React.Fragment />;
+
+    const voidElements = new Set([
+      "area", "base", "br", "col", "embed", "hr", "img",
+      "input", "link", "meta", "source", "track", "wbr",
+    ]);
+    const isVoid = typeof TheTag === "string" && voidElements.has(TheTag);
+    if (isVoid && content != null) {
+      console.warn(`[Component] "${this.name}" renders void <${TheTag}> with children:`, content);
+    }
+    return createElement(TheTag, props, isVoid ? undefined : content);
   }
 }

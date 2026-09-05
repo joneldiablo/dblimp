@@ -14,10 +14,14 @@ export default class BaseController<
 > extends Controller<TProps, TState> {
   static jsClass = "BaseController";
 
-  state = {
-    status: "idle",
-    error: null,
-  } as TState;
+  constructor(props: TProps) {
+    super(props);
+    this.state = {
+      ...this.state,
+      status: "idle",
+      error: null,
+    } as TState;
+  }
 
   async asyncSetState(nextState: Partial<TState>) {
     return new Promise<boolean>((resolve) => {

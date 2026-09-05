@@ -7,7 +7,7 @@ import t from "dbl-utils/i18n";
 import formatValue from "dbl-utils/format-value";
 import { hash } from "dbl-utils/utils";
 
-import COMPONENTS from "./components";
+import COMPONENTS from "./component-registry";
 
 /** Components that should not be wrapped in a `<section>` by default. */
 const excludeSectionWrapper: string[] = [

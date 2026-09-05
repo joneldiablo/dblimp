@@ -2,6 +2,7 @@ import React from "react";
 import { Route as RouteRR, RouteProps as RoutePropsRR } from "react-router-dom";
 
 import Component, { ComponentProps } from "../component";
+import { addComponents } from "../component-registry";
 
 export interface RouteProps extends ComponentProps, Omit<RoutePropsRR, 'children'> {
   component: string;
@@ -57,3 +58,5 @@ export default class Route extends Component<RouteProps> {
     return active ? <RouteRR key={name} {...props} /> : <React.Fragment>{false}</React.Fragment>;
   }
 }
+
+addComponents({ Route });

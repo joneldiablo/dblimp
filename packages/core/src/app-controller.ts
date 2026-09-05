@@ -16,7 +16,7 @@ import {
   addFormatDateTime
 } from "dbl-utils/i18n";
 
-import { addComponents } from "./components";
+import { addComponents } from "./component-registry";
 import { addControllers } from "./controllers";
 import { addFields } from "./fields";
 import Controller from "./controllers/controller";

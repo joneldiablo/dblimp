@@ -303,7 +303,7 @@
                         "tag": "div",
                         "classes": "mb-3",
                         "content": {
-                          "label": { "name": "label", "tag": "label", "classes": "form-label", "_props": { "for": "inputEmail" }, "content": "Correo electrónico" },
+                          "label": { "name": "label", "tag": "label", "classes": "form-label", "_props": { "htmlFor": "inputEmail" }, "content": "Correo electrónico" },
                           "input": { "name": "input", "tag": "input", "classes": "form-control", "_props": { "type": "email", "id": "inputEmail", "placeholder": "nombre@correo.com" } },
                           "help": { "name": "help", "tag": "div", "classes": "form-text", "content": "Nunca compartiremos tu correo con nadie más." }
                         }
@@ -313,17 +313,17 @@
                         "tag": "div",
                         "classes": "mb-3",
                         "content": {
-                          "label": { "name": "label", "tag": "label", "classes": "form-label", "_props": { "for": "selectExample" }, "content": "Selecciona una opción" },
+                          "label": { "name": "label", "tag": "label", "classes": "form-label", "_props": { "htmlFor": "selectExample" }, "content": "Selecciona una opción" },
                           "select": {
                             "name": "select",
                             "tag": "select",
                             "classes": "form-select",
-                            "_props": { "id": "selectExample" },
+                            "_props": { "id": "selectExample", "defaultValue": "placeholder" },
                             "content": [
-                              { "name": "optionDefault", "tag": "option", "_props": { "selected": true }, "content": "Elige..." },
-                              { "name": "option1", "tag": "option", "content": "Opción uno" },
-                              { "name": "option2", "tag": "option", "content": "Opción dos" },
-                              { "name": "option3", "tag": "option", "content": "Opción tres" }
+                              { "name": "optionDefault", "tag": "option", "_props": { "value": "placeholder" }, "content": "Elige..." },
+                              { "name": "option1", "tag": "option", "_props": { "value": "1" }, "content": "Opción uno" },
+                              { "name": "option2", "tag": "option", "_props": { "value": "2" }, "content": "Opción dos" },
+                              { "name": "option3", "tag": "option", "_props": { "value": "3" }, "content": "Opción tres" }
                             ]
                           }
                         }
@@ -333,7 +333,7 @@
                         "tag": "div",
                         "classes": "mb-3",
                         "content": {
-                          "label": { "name": "label", "tag": "label", "classes": "form-label", "_props": { "for": "fileInput" }, "content": "Carga un archivo" },
+                          "label": { "name": "label", "tag": "label", "classes": "form-label", "_props": { "htmlFor": "fileInput" }, "content": "Carga un archivo" },
                           "input": { "name": "input", "tag": "input", "classes": "form-control", "_props": { "type": "file", "id": "fileInput" } }
                         }
                       }
@@ -350,7 +350,7 @@
                         "classes": "form-check mb-2",
                         "content": {
                           "input": { "name": "input", "tag": "input", "classes": "form-check-input", "_props": { "type": "checkbox", "id": "check1", "checked": true } },
-                          "label": { "name": "label", "tag": "label", "classes": "form-check-label", "_props": { "for": "check1" }, "content": "Opción seleccionada" }
+                          "label": { "name": "label", "tag": "label", "classes": "form-check-label", "_props": { "htmlFor": "check1" }, "content": "Opción seleccionada" }
                         }
                       },
                       "radio1": {
@@ -359,7 +359,7 @@
                         "classes": "form-check mb-2",
                         "content": {
                           "input": { "name": "input", "tag": "input", "classes": "form-check-input", "_props": { "type": "radio", "name": "radioGroup", "id": "radio1", "checked": true } },
-                          "label": { "name": "label", "tag": "label", "classes": "form-check-label", "_props": { "for": "radio1" }, "content": "Opción A" }
+                          "label": { "name": "label", "tag": "label", "classes": "form-check-label", "_props": { "htmlFor": "radio1" }, "content": "Opción A" }
                         }
                       },
                       "radio2": {
@@ -368,7 +368,7 @@
                         "classes": "form-check mb-3",
                         "content": {
                           "input": { "name": "input", "tag": "input", "classes": "form-check-input", "_props": { "type": "radio", "name": "radioGroup", "id": "radio2" } },
-                          "label": { "name": "label", "tag": "label", "classes": "form-check-label", "_props": { "for": "radio2" }, "content": "Opción B" }
+                          "label": { "name": "label", "tag": "label", "classes": "form-check-label", "_props": { "htmlFor": "radio2" }, "content": "Opción B" }
                         }
                       },
                       "submit": {

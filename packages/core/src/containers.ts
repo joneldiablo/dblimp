@@ -1,6 +1,6 @@
 import React from "react";
 import Component, { ComponentProps } from "./component";
-import { addComponents } from "./components";
+import { addComponents } from "./component-registry";
 
 import Container from "./containers/container";
 import DetailsContainer from "./containers/details-container";
@@ -42,5 +42,7 @@ export const addContainers = (containers: Record<string, typeof Container> | Rea
   Object.assign(CONTAINERS, containers);
   addComponents(containers as Record<string, typeof Component<any, any>>);
 }
+
+addComponents(CONTAINERS as Record<string, React.FC<any> | typeof Component<any, any>>);
 
 export default CONTAINERS;

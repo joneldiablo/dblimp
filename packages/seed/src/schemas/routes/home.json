@@ -26,28 +26,28 @@
         "classes": "seed-tools",
         "content": {
           "galleryLink": {
-            "tag": "a",
-            "class": "seed-tool-link",
+            "component": "Link",
+            "classes": "seed-tool-link",
             "to": "/gallery",
             "content": "Galería de imágenes"
           },
           "iconsLink": {
-            "tag": "a",
+            "component": "Link",
             "to": "/icons",
             "content": "Catálogo de íconos"
           },
           "svgsLink": {
-            "tag": "a",
+            "component": "Link",
             "to": "/svgs",
             "content": "SVGs inline"
           },
           "bootstrapLink": {
-            "tag": "a",
+            "component": "Link",
             "to": "/bootstrap-preview",
             "content": "Preview Bootstrap"
           },
           "screenLink": {
-            "tag": "a",
+            "component": "Link",
             "to": "/screen-preview",
             "content": "Previsualización de pantallas"
           }
